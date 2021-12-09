@@ -8,38 +8,38 @@ package edu.neu.csye6200.model;
  *
  * @author anuragparla
  */
-public class Teacher extends AbstractPerson {
+public class Teacher extends Person{
     private int credits;
     public Teacher(int age, String name, int credits) {
-        super();
-        this.credits = credits;
-        
-    }
-    public void setCredits(int credits) {
+        super(age, name);
         this.credits = credits;
     }
-    public int getCredits() {
-        return credits;
-    }
-
     @Override
     public void setage(int age) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        this.age = age;
     }
 
     @Override
     public int getAge(int age) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return age;
     }
 
     @Override
     public void setName(String name) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        this.name = name;
     }
 
     @Override
     public String getName() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return name;
+    }
+    
+    public void setCredits(int credits) {
+        this.credits = credits;
+    }
+    
+    public int getCredits() {
+        return credits;
     }
     
 }

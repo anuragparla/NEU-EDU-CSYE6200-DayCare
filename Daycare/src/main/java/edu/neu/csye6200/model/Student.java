@@ -8,26 +8,39 @@ package edu.neu.csye6200.model;
  *
  * @author anuragparla
  */
-public class Student extends AbstractPerson {
+public class Student extends Person {
+    private double gpa;
+    public Student(int age, String name, double gpa ) {
+        super(age,name);
+        this.gpa = gpa;
+        
+    }
 
     @Override
     public void setage(int age) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        this.age = age;
     }
 
     @Override
     public int getAge(int age) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return age;
     }
 
     @Override
     public void setName(String name) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        this.name = name;
     }
 
     @Override
     public String getName() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return name;
     }
     
+    public void setGPA() {
+        this.gpa = gpa;
+    }
+    
+    public double getGPA() {
+        return gpa;
+    }
 }
