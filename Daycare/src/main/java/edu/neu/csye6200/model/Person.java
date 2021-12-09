@@ -16,9 +16,16 @@ public class Person extends AbstractPerson {
         this.age = age;
         this.name = name;
     }
-
+    
+    public Person(String data) {
+        String[] parsedString = data.split(",");
+        setAge(Integer.parseInt(parsedString[0]));
+        setName(parsedString[1]);
+           
+    }
+    
     @Override
-    public void setage(int age) {
+    public void setAge(int age) {
         this.age = age;
     }
 

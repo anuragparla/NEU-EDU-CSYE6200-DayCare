@@ -9,38 +9,58 @@ package edu.neu.csye6200.model;
  * @author anuragparla
  */
 public class Student extends Person {
+
+    public Student(double gpa, String parentName, String address, String phoneNumber, int age, String name) {
+        super(age, name);
+        this.gpa = gpa;
+        this.parentName = parentName;
+        this.address = address;
+        this.phoneNumber = phoneNumber;
+    }
+
+    public Student(double gpa, String parentName, String address, String phoneNumber, String data) {
+        super(data);
+        this.gpa = gpa;
+        this.parentName = parentName;
+        this.address = address;
+        this.phoneNumber = phoneNumber;
+    }
     private double gpa;
-    public Student(int age, String name, double gpa ) {
-        super(age,name);
+    private String parentName;
+    private String address;
+    private String phoneNumber;
+
+    public void setGpa(double gpa) {
         this.gpa = gpa;
+    }
+
+    public void setParentName(String parentName) {
+        this.parentName = parentName;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
         
-    }
-
-    @Override
-    public void setage(int age) {
-        this.age = age;
-    }
-
-    @Override
-    public int getAge(int age) {
-        return age;
-    }
-
-    @Override
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    @Override
-    public String getName() {
-        return name;
-    }
-    
-    public void setGPA() {
-        this.gpa = gpa;
-    }
-    
-    public double getGPA() {
+    public double getGpa() {
         return gpa;
     }
+
+    public String getParentName() {
+        return parentName;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+    
+    
 }

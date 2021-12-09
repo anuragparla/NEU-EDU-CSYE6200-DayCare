@@ -8,11 +8,6 @@ package edu.neu.csye6200.model;
  *
  * @author anuragparla
  */
-public abstract class AbstractPerson {
-    
-    public abstract void setAge(int age);
-    public abstract int getAge(int age);
-    public abstract void setName(String name);
-    public abstract String getName ();
+public class Classroom {
     
 }
