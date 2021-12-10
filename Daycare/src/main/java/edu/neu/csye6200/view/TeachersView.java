@@ -3,11 +3,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
 package edu.neu.csye6200.view;
-import java.awt.BorderLayout;
-import java.awt.Dimension;
+
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.*;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
@@ -15,18 +13,14 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author varun
  */
-public class StudentsView extends javax.swing.JPanel {
-    
-    public StudentsView(String[] rows, List<Object> students){
-        
-    }
+public class TeachersView extends javax.swing.JPanel {
+
     /**
-     * Creates new form StudentsView
+     * Creates new form Teachers
      */
-    public StudentsView() {
+    public TeachersView() {
         initComponents();
-        postInit();
-        addStudentTable();
+        addTeacherTable();
     }
 
     /**
@@ -39,26 +33,38 @@ public class StudentsView extends javax.swing.JPanel {
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        teacherHeadingLabel = new javax.swing.JLabel();
+        jPanel4 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         totalCountLabel = new javax.swing.JLabel();
         totalCount = new javax.swing.JLabel();
-        addStudentButton = new javax.swing.JButton();
+        addTeacherButton = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
-        addStudentThroughCSVButton = new javax.swing.JButton();
-        addStudentThroughFormButton = new javax.swing.JButton();
+        addTeacherThroughCSVButton = new javax.swing.JButton();
+        addTeacherThroughFormButton = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        studentTable = new javax.swing.JTable();
-        jPanel4 = new javax.swing.JPanel();
+        teacherTable = new javax.swing.JTable();
 
         setBackground(new java.awt.Color(255, 255, 255));
-        setBounds(new java.awt.Rectangle(10, 0, 0, 0));
-        setPreferredSize(new java.awt.Dimension(1486, 907));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabel1.setFont(new java.awt.Font("PT Sans", 3, 24)); // NOI18N
-        jLabel1.setText("S T U D E N T S");
+        teacherHeadingLabel.setFont(new java.awt.Font("PT Sans", 3, 24)); // NOI18N
+        teacherHeadingLabel.setText("T E A C H E R S");
+
+        jPanel4.setBackground(new java.awt.Color(255, 51, 51));
+        jPanel4.setForeground(new java.awt.Color(255, 0, 0));
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 169, Short.MAX_VALUE)
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 8, Short.MAX_VALUE)
+        );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -66,14 +72,18 @@ public class StudentsView extends javax.swing.JPanel {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(teacherHeadingLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 256, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(teacherHeadingLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(1, 1, 1)
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -81,26 +91,26 @@ public class StudentsView extends javax.swing.JPanel {
 
         totalCountLabel.setText("Total count:");
 
-        addStudentButton.setText("+ Add");
-        addStudentButton.addActionListener(new java.awt.event.ActionListener() {
+        addTeacherButton.setText("+ Add");
+        addTeacherButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addStudentButtonActionPerformed(evt);
+                addTeacherButtonActionPerformed(evt);
             }
         });
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
-        addStudentThroughCSVButton.setText("CSV file ");
-        addStudentThroughCSVButton.addActionListener(new java.awt.event.ActionListener() {
+        addTeacherThroughCSVButton.setText("CSV file ");
+        addTeacherThroughCSVButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addStudentThroughCSVButtonActionPerformed(evt);
+                addTeacherThroughCSVButtonActionPerformed(evt);
             }
         });
 
-        addStudentThroughFormButton.setText("Form");
-        addStudentThroughFormButton.addActionListener(new java.awt.event.ActionListener() {
+        addTeacherThroughFormButton.setText("Form");
+        addTeacherThroughFormButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                addStudentThroughFormButtonActionPerformed(evt);
+                addTeacherThroughFormButtonActionPerformed(evt);
             }
         });
 
@@ -109,19 +119,18 @@ public class StudentsView extends javax.swing.JPanel {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(addStudentThroughCSVButton, javax.swing.GroupLayout.DEFAULT_SIZE, 110, Short.MAX_VALUE)
-                    .addComponent(addStudentThroughFormButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(addTeacherThroughFormButton, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(addTeacherThroughCSVButton, javax.swing.GroupLayout.DEFAULT_SIZE, 102, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(addStudentThroughCSVButton)
+                .addComponent(addTeacherThroughCSVButton)
                 .addGap(0, 0, 0)
-                .addComponent(addStudentThroughFormButton)
+                .addComponent(addTeacherThroughFormButton)
                 .addContainerGap())
         );
 
@@ -133,35 +142,35 @@ public class StudentsView extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(totalCountLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(addStudentButton, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(addTeacherButton, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(27, 27, 27))
+                .addContainerGap())
             .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel3Layout.createSequentialGroup()
                     .addGap(44, 44, 44)
                     .addComponent(totalCount)
-                    .addContainerGap(1436, Short.MAX_VALUE)))
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(7, 7, 7)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(addStudentButton)
+                    .addComponent(addTeacherButton)
                     .addComponent(totalCountLabel))
-                .addContainerGap(48, Short.MAX_VALUE))
+                .addContainerGap(49, Short.MAX_VALUE))
             .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel3Layout.createSequentialGroup()
                     .addGap(50, 50, 50)
                     .addComponent(totalCount)
-                    .addContainerGap(34, Short.MAX_VALUE)))
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
         jScrollPane1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 
-        studentTable.setModel(new javax.swing.table.DefaultTableModel(
+        teacherTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -172,21 +181,7 @@ public class StudentsView extends javax.swing.JPanel {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(studentTable);
-
-        jPanel4.setBackground(new java.awt.Color(255, 51, 51));
-        jPanel4.setForeground(new java.awt.Color(255, 0, 0));
-
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 177, Short.MAX_VALUE)
-        );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 11, Short.MAX_VALUE)
-        );
+        jScrollPane1.setViewportView(teacherTable);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -194,50 +189,38 @@ public class StudentsView extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 722, Short.MAX_VALUE))
                 .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addGap(14, 14, 14)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1444, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(28, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(15, 15, 15)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 459, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(266, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void addStudentThroughCSVButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addStudentThroughCSVButtonActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_addStudentThroughCSVButtonActionPerformed
+    private void addTeacherButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addTeacherButtonActionPerformed
 
-    private void addStudentThroughFormButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addStudentThroughFormButtonActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_addStudentThroughFormButtonActionPerformed
-
-    private void addStudentButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addStudentButtonActionPerformed
-        
         jPanel2.setVisible(true);
-    }//GEN-LAST:event_addStudentButtonActionPerformed
-    public void postInit(){
-        jPanel2.setVisible(false);
-    }
-    
-    public void addStudentTable(){
+    }//GEN-LAST:event_addTeacherButtonActionPerformed
+
+    private void addTeacherThroughCSVButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addTeacherThroughCSVButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_addTeacherThroughCSVButtonActionPerformed
+
+    private void addTeacherThroughFormButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addTeacherThroughFormButtonActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_addTeacherThroughFormButtonActionPerformed
+
+    public void addTeacherTable(){
         DefaultTableModel myTM = new DefaultTableModel();
         String[] colTitles = {"ID","first name", "last name"," age"};
         List<Student> obj = new ArrayList<Student>();
@@ -263,27 +246,26 @@ public class StudentsView extends javax.swing.JPanel {
     public void generateTable(DefaultTableModel myTM){
         
         jScrollPane1.setVisible(false);
-        studentTable.setModel(myTM);
-        studentTable.setAutoCreateRowSorter(true);
-        studentTable.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
-        studentTable.setFillsViewportHeight(true);
-        jScrollPane1.setViewportView(studentTable);
+        teacherTable.setModel(myTM);
+        teacherTable.setAutoCreateRowSorter(true);
+        teacherTable.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
+        teacherTable.setFillsViewportHeight(true);
+        jScrollPane1.setViewportView(teacherTable);
         jScrollPane1.setVisible(true);
         
     }
-    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton addStudentButton;
-    private javax.swing.JButton addStudentThroughCSVButton;
-    private javax.swing.JButton addStudentThroughFormButton;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton addTeacherButton;
+    private javax.swing.JButton addTeacherThroughCSVButton;
+    private javax.swing.JButton addTeacherThroughFormButton;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable studentTable;
+    private javax.swing.JLabel teacherHeadingLabel;
+    private javax.swing.JTable teacherTable;
     private javax.swing.JLabel totalCount;
     private javax.swing.JLabel totalCountLabel;
     // End of variables declaration//GEN-END:variables

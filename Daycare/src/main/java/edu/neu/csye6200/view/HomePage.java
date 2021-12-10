@@ -44,12 +44,12 @@ public class HomePage extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        teacherMenuButton = new javax.swing.JButton();
+        classroomMenuButton = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        studentMenuButton = new javax.swing.JButton();
+        alertsDialogButton = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
@@ -110,17 +110,17 @@ public class HomePage extends javax.swing.JFrame {
         jLabel2.setForeground(new java.awt.Color(255, 51, 51));
         jLabel2.setText("C A R E");
 
-        jButton1.setText("Teacher");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        teacherMenuButton.setText("Teacher");
+        teacherMenuButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                teacherMenuButtonActionPerformed(evt);
             }
         });
 
-        jButton2.setText("Classroom");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        classroomMenuButton.setText("Classroom");
+        classroomMenuButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                classroomMenuButtonActionPerformed(evt);
             }
         });
 
@@ -131,17 +131,17 @@ public class HomePage extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("PT Serif", 2, 13)); // NOI18N
         jLabel5.setText("Daniel Peters");
 
-        jButton3.setText("Student");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
+        studentMenuButton.setText("Student");
+        studentMenuButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
+                studentMenuButtonActionPerformed(evt);
             }
         });
 
-        jButton4.setText("Alerts");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        alertsDialogButton.setText("Alerts");
+        alertsDialogButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                alertsDialogButtonActionPerformed(evt);
             }
         });
 
@@ -155,14 +155,14 @@ public class HomePage extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel2)
                 .addGap(60, 60, 60)
-                .addComponent(jButton3)
+                .addComponent(studentMenuButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1)
+                .addComponent(teacherMenuButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton2)
+                .addComponent(classroomMenuButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 375, Short.MAX_VALUE)
+                .addComponent(alertsDialogButton)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 675, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3)
                     .addComponent(jLabel5))
@@ -179,10 +179,10 @@ public class HomePage extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(teacherMenuButton, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(classroomMenuButton, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(studentMenuButton, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(alertsDialogButton, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel3)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -191,29 +191,31 @@ public class HomePage extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 6, 1180, -1));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 6, 1480, -1));
+
+        jPanel2.setPreferredSize(getPreferredSize());
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1180, Short.MAX_VALUE)
+            .addGap(0, 1480, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 475, Short.MAX_VALUE)
+            .addGap(0, 830, Short.MAX_VALUE)
         );
 
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 77, 1180, -1));
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 77, 1480, 830));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void studentMenuButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_studentMenuButtonActionPerformed
        jPanel2.removeAll();
        jPanel2.setVisible(false);
         StudentsView s1 = new StudentsView();
-        s1.setSize(1080, 1920);
+        s1.setSize(1480,900);
         s1.setVisible(true);
         jPanel2.setSize(jPanel2.getPreferredSize().height, jPanel2.getPreferredSize().width);
         jPanel2.add(s1);
@@ -222,33 +224,33 @@ public class HomePage extends javax.swing.JFrame {
 //        CardLayout layout = (CardLayout) jPanel2.getLayout();
 //        layout.next(jPanel2);
         
-    }//GEN-LAST:event_jButton3ActionPerformed
+    }//GEN-LAST:event_studentMenuButtonActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void alertsDialogButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_alertsDialogButtonActionPerformed
         jDialog1.pack();
         jDialog1.setSize(jDialog1.getPreferredSize().width*2, jDialog1.getPreferredSize().height*2);
         jDialog1.setVisible(true);
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_alertsDialogButtonActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void teacherMenuButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_teacherMenuButtonActionPerformed
         jPanel2.removeAll();
         jPanel2.setVisible(false);
-        Teachers t1 = new Teachers();
-        t1.setSize(1080, 1920);
+        TeachersView t1 = new TeachersView();
+        t1.setSize(1480, 900);
         t1.setVisible(true);
         jPanel2.setSize(jPanel2.getPreferredSize().height, jPanel2.getPreferredSize().width);
         jPanel2.add(t1); 
         jPanel2.setVisible(true);
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_teacherMenuButtonActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void classroomMenuButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_classroomMenuButtonActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_classroomMenuButtonActionPerformed
 
     public void postInit(){
         jFrame1.setVisible(false);
-        jFrame1.setExtendedState(JFrame.MAXIMIZED_BOTH); 
         jFrame1.setUndecorated(true);
+        jFrame1.setSize(1920, 1080);
         jFrame1.setVisible(true);
     }
     /**
@@ -287,10 +289,8 @@ public class HomePage extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
+    private javax.swing.JButton alertsDialogButton;
+    private javax.swing.JButton classroomMenuButton;
     private javax.swing.JDialog jDialog1;
     private javax.swing.JFrame jFrame1;
     private javax.swing.JLabel jLabel1;
@@ -301,5 +301,7 @@ public class HomePage extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JButton studentMenuButton;
+    private javax.swing.JButton teacherMenuButton;
     // End of variables declaration//GEN-END:variables
 }
