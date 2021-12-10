@@ -19,9 +19,9 @@ public class Person extends AbstractPerson {
     
     public Person(String data) {
         String[] parsedString = data.split(",");
-        setAge(Integer.parseInt(parsedString[0]));
-        setName(parsedString[1]);
-           
+        setName(parsedString[0]);
+        setAge(Integer.parseInt(parsedString[1]));
+                
     }
     
     @Override

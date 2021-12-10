@@ -17,13 +17,22 @@ public class Student extends Person {
         this.address = address;
         this.phoneNumber = phoneNumber;
     }
-
+    /*
     public Student(double gpa, String parentName, String address, String phoneNumber, String data) {
         super(data);
         this.gpa = gpa;
         this.parentName = parentName;
         this.address = address;
         this.phoneNumber = phoneNumber;
+    }*/
+    
+    public Student(String data) {
+        super(data);
+        String[] parsedString = data.split(",");
+        setGpa(Double.parseDouble(parsedString[2]));
+        setParentName(parsedString[3]);
+        setAddress(parsedString[4]);
+        setPhoneNumber(parsedString[5]);
     }
     private double gpa;
     private String parentName;
