@@ -244,7 +244,14 @@ public class HomePage extends javax.swing.JFrame {
     }//GEN-LAST:event_teacherMenuButtonActionPerformed
 
     private void classroomMenuButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_classroomMenuButtonActionPerformed
-        // TODO add your handling code here:
+        jPanel2.removeAll();
+        jPanel2.setVisible(false);
+        ClassRoomsView c1 = new ClassRoomsView();
+        c1.setSize(1480, 900);
+        c1.setVisible(true);
+        jPanel2.setSize(jPanel2.getPreferredSize().height, jPanel2.getPreferredSize().width);
+        jPanel2.add(c1); 
+        jPanel2.setVisible(true);
     }//GEN-LAST:event_classroomMenuButtonActionPerformed
 
     public void postInit(){
