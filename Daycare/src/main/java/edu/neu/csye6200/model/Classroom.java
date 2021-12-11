@@ -1,13 +1,50 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package edu.neu.csye6200.model;
+
+import java.util.Vector;
 
 /**
  *
- * @author anuragparla
+ * @author hiralrnagda
  */
 public class Classroom {
+    Vector groupIds;
+    int minAge;
+    int maxAge;
+    int maxGroups;
+
+    public Vector getGroupIds() {
+        return groupIds;
+    }
+
+    public void setGroupIds(Vector groupIds) {
+        this.groupIds = groupIds;
+    }
+
+    public int getMinAge() {
+        return minAge;
+    }
+
+    public void setMinAge(int minAge) {
+        this.minAge = minAge;
+    }
+
+    public int getMaxAge() {
+        return maxAge;
+    }
+
+    public void setMaxAge(int maxAge) {
+        this.maxAge = maxAge;
+    }
+
+    public int getMaxGroups() {
+        return maxGroups;
+    }
+
+    public void setMaxGroups(int maxGroups) {
+        this.maxGroups = maxGroups;
+    }
+    
+    
+    
     
 }
