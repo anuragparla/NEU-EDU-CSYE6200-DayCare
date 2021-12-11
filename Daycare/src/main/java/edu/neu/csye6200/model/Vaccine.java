@@ -30,6 +30,15 @@ public class Vaccine {
         this.maxDoses = maxDoses;
         this.doseDetails = new ArrayList<List<String>>();
     }
+    
+    public Vaccine (String csvData) {
+        String[] parsedVaccineData = {};
+        setStudentId(Integer.parseInt(parsedVaccineData[0]));
+        setVaccineName(parsedVaccineData[1]);
+        setVaccineDescription(parsedVaccineData[2]);
+        setMaxDoses(Integer.parseInt(parsedVaccineData[3]));
+        setDoseDetails(new ArrayList<List<String>>());
+    }
 
     public int getStudentId() {
         return studentId;
