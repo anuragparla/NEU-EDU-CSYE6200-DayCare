@@ -1,4 +1,4 @@
-package edu.neu.csye6200;
+package edu.neu.csye6200.util;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;

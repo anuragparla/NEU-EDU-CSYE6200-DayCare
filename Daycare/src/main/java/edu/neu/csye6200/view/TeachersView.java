@@ -4,12 +4,14 @@
  */
 package edu.neu.csye6200.view;
 
+import edu.neu.csye6200.util.FileUtil;
 import java.awt.Dialog;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JDialog;
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
@@ -27,7 +29,8 @@ public class TeachersView extends javax.swing.JPanel {
     public TeachersView() {
         initComponents();
         this.teachersList = new ArrayList<>();
-        addTeacherTable();
+        postInit();
+        
         
     }
 
@@ -185,13 +188,13 @@ public class TeachersView extends javax.swing.JPanel {
 
         teacherTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Name", "Age", "Credits", "PhoneNumber"
+                "Name", "Age", "Credits", "Address", "PhoneNumber"
             }
         ));
         jScrollPane1.setViewportView(teacherTable);
@@ -246,6 +249,21 @@ public class TeachersView extends javax.swing.JPanel {
         {
             File selectedFile = fileChooser.getSelectedFile();
             System.out.println("Selected file: " + selectedFile.getAbsolutePath());
+            if(selectedFile.getAbsolutePath().endsWith(".csv"))
+            {
+                 List<String> csvStrings = FileUtil.readCSVFile( selectedFile.getAbsolutePath());
+                 for(String csvString : csvStrings)
+                     teachersList.add(new Teacher(csvString));
+                 
+                 JOptionPane.showMessageDialog(this, "Added Teachers Successfully..!", "Added Teachers", 1);
+                  populateTable();
+                  updateTotalCount();
+                  jPanel2.setVisible(false); 
+            }
+            else{
+               
+                JOptionPane.showMessageDialog(this, "Please select csv files only!!", "CSV file required ", 2);
+            }
         }
     }//GEN-LAST:event_addTeacherThroughCSVButtonActionPerformed
 
@@ -255,34 +273,21 @@ public class TeachersView extends javax.swing.JPanel {
             AddTeacherDialog dialog = new AddTeacherDialog(teachersList);
             dialog.setModalityType(Dialog.ModalityType.APPLICATION_MODAL);
             dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+            dialog.setLocationRelativeTo(null);
             dialog.setVisible(true);
         } catch (Exception ex) {
             ex.printStackTrace();
         }
+        populateTable();
+        updateTotalCount();
+        jPanel2.setVisible(false); 
     }//GEN-LAST:event_addTeacherThroughFormButtonActionPerformed
 
     private void btnRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefreshActionPerformed
        populateTable();
+       updateTotalCount();
     }//GEN-LAST:event_btnRefreshActionPerformed
 
-    public void addTeacherTable(){
-        myTM = new DefaultTableModel();
-        String[] colTitles = {"ID","Name", "Age"," Credits"};
-        
-        /**
-         * Set the table columns and their titles
-         */
-        myTM.setColumnCount(colTitles.length);
-        myTM.setColumnIdentifiers(colTitles);
-        int ix = 0; // use ix as an index, i.e. id for object in table
-        
-        for (Teacher teacher : teachersList) {
-         
-         myTM.addRow(new Object[]{++ix, teacher.getName(), teacher.getAge(), teacher.getCredits()});
-        }
-        generateTable(myTM);
-        
-}
     public void populateTable()
     {
         
@@ -290,25 +295,37 @@ public class TeachersView extends javax.swing.JPanel {
         int ix = 0;
         for (Teacher teacher : teachersList) {
          
-         myTM.addRow(new Object[]{++ix, teacher.getName(), teacher.getAge(), teacher.getCredits()});
+            Object[] objs = new Object[] {++ix, teacher.getFirstName(), teacher.getLastName(), teacher.getAge(), teacher.getCredits()};
+            myTM.addRow(objs);
         }
         
     }
     
-
-    public void generateTable(DefaultTableModel myTM){
+    public void updateTotalCount()
+    {
+        totalCountLabel.setText("Total Count: " + teachersList.size());
+    }
+    
+    public void generateTable(){
         
+        myTM = (DefaultTableModel) teacherTable.getModel();
         jScrollPane1.setVisible(false);
-        teacherTable.setModel(myTM);
         teacherTable.setAutoCreateRowSorter(true);
         teacherTable.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
         teacherTable.setFillsViewportHeight(true);
         jScrollPane1.setViewportView(teacherTable);
         jScrollPane1.setVisible(true);
+        populateTable();
         
     }
     
-    
+    public void postInit(){
+        jPanel2.setVisible(false); 
+        generateTable();
+        updateTotalCount();
+       
+    }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addTeacherButton;
