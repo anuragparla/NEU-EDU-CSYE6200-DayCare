@@ -15,6 +15,7 @@ public class ClassRoomsView extends javax.swing.JPanel {
      */
     public ClassRoomsView() {
         initComponents();
+        
     }
 
     /**

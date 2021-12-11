@@ -251,6 +251,7 @@ public class HomePage extends javax.swing.JFrame {
         c1.setVisible(true);
         jPanel2.setSize(jPanel2.getPreferredSize().height, jPanel2.getPreferredSize().width);
         jPanel2.add(c1); 
+        
         jPanel2.setVisible(true);
     }//GEN-LAST:event_classroomMenuButtonActionPerformed
 

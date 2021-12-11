@@ -235,6 +235,7 @@ public class StudentsView extends javax.swing.JPanel {
     }//GEN-LAST:event_addStudentButtonActionPerformed
     public void postInit(){
         jPanel2.setVisible(false);
+        
     }
     
     public void addStudentTable(){

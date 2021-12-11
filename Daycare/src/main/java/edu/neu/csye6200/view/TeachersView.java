@@ -21,6 +21,7 @@ public class TeachersView extends javax.swing.JPanel {
     public TeachersView() {
         initComponents();
         addTeacherTable();
+        
     }
 
     /**
