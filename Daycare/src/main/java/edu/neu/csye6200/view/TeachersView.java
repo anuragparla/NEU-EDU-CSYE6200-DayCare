@@ -4,8 +4,12 @@
  */
 package edu.neu.csye6200.view;
 
+import java.awt.Dialog;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JDialog;
+import javax.swing.JFileChooser;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
@@ -18,9 +22,13 @@ public class TeachersView extends javax.swing.JPanel {
     /**
      * Creates new form Teachers
      */
+    DefaultTableModel myTM;
+    private List<Teacher> teachersList;
     public TeachersView() {
         initComponents();
+        this.teachersList = new ArrayList<>();
         addTeacherTable();
+        
     }
 
     /**
@@ -32,6 +40,7 @@ public class TeachersView extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jRadioButtonMenuItem1 = new javax.swing.JRadioButtonMenuItem();
         jPanel1 = new javax.swing.JPanel();
         teacherHeadingLabel = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
@@ -44,6 +53,10 @@ public class TeachersView extends javax.swing.JPanel {
         addTeacherThroughFormButton = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         teacherTable = new javax.swing.JTable();
+        btnRefresh = new javax.swing.JButton();
+
+        jRadioButtonMenuItem1.setSelected(true);
+        jRadioButtonMenuItem1.setText("jRadioButtonMenuItem1");
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -143,7 +156,7 @@ public class TeachersView extends javax.swing.JPanel {
                 .addComponent(totalCountLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(addTeacherButton, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
             .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -178,10 +191,17 @@ public class TeachersView extends javax.swing.JPanel {
                 {null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Name", "Age", "Credits", "PhoneNumber"
             }
         ));
         jScrollPane1.setViewportView(teacherTable);
+
+        btnRefresh.setText("Refresh");
+        btnRefresh.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRefreshActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -193,6 +213,10 @@ public class TeachersView extends javax.swing.JPanel {
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 722, Short.MAX_VALUE))
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(btnRefresh)
+                .addGap(130, 130, 130))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -202,8 +226,10 @@ public class TeachersView extends javax.swing.JPanel {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 459, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(53, 53, 53)
+                .addComponent(btnRefresh)
+                .addContainerGap(231, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -213,20 +239,36 @@ public class TeachersView extends javax.swing.JPanel {
     }//GEN-LAST:event_addTeacherButtonActionPerformed
 
     private void addTeacherThroughCSVButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addTeacherThroughCSVButtonActionPerformed
-        // TODO add your handling code here:
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setCurrentDirectory(new File("./"));
+        int result = fileChooser.showOpenDialog(this);
+        if (result == JFileChooser.APPROVE_OPTION)
+        {
+            File selectedFile = fileChooser.getSelectedFile();
+            System.out.println("Selected file: " + selectedFile.getAbsolutePath());
+        }
     }//GEN-LAST:event_addTeacherThroughCSVButtonActionPerformed
 
     private void addTeacherThroughFormButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addTeacherThroughFormButtonActionPerformed
-        // TODO add your handling code here:
+         try 
+         {
+            AddTeacherDialog dialog = new AddTeacherDialog(teachersList);
+            dialog.setModalityType(Dialog.ModalityType.APPLICATION_MODAL);
+            dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+            dialog.setVisible(true);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
     }//GEN-LAST:event_addTeacherThroughFormButtonActionPerformed
 
+    private void btnRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefreshActionPerformed
+       populateTable();
+    }//GEN-LAST:event_btnRefreshActionPerformed
+
     public void addTeacherTable(){
-        DefaultTableModel myTM = new DefaultTableModel();
-        String[] colTitles = {"ID","first name", "last name"," age"};
-        List<Student> obj = new ArrayList<Student>();
-        for(int i = 0; i< 50; i++){
-            obj.add(new Student("Varun","V",(20+i)));
-        }
+        myTM = new DefaultTableModel();
+        String[] colTitles = {"ID","Name", "Age"," Credits"};
+        
         /**
          * Set the table columns and their titles
          */
@@ -234,15 +276,26 @@ public class TeachersView extends javax.swing.JPanel {
         myTM.setColumnIdentifiers(colTitles);
         int ix = 0; // use ix as an index, i.e. id for object in table
         
-        for (Student p : obj) {
+        for (Teacher teacher : teachersList) {
          
-         myTM.addRow(new Object[]{++ix, p.getFirstName(), p.getLastName(), p.getAge()});
+         myTM.addRow(new Object[]{++ix, teacher.getName(), teacher.getAge(), teacher.getCredits()});
         }
         generateTable(myTM);
         
 }
-
+    public void populateTable()
+    {
+        
+        myTM.setRowCount(0);
+        int ix = 0;
+        for (Teacher teacher : teachersList) {
+         
+         myTM.addRow(new Object[]{++ix, teacher.getName(), teacher.getAge(), teacher.getCredits()});
+        }
+        
+    }
     
+
     public void generateTable(DefaultTableModel myTM){
         
         jScrollPane1.setVisible(false);
@@ -254,15 +307,19 @@ public class TeachersView extends javax.swing.JPanel {
         jScrollPane1.setVisible(true);
         
     }
+    
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addTeacherButton;
     private javax.swing.JButton addTeacherThroughCSVButton;
     private javax.swing.JButton addTeacherThroughFormButton;
+    private javax.swing.JButton btnRefresh;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JRadioButtonMenuItem jRadioButtonMenuItem1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel teacherHeadingLabel;
     private javax.swing.JTable teacherTable;

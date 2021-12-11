@@ -4,7 +4,9 @@
  */
 package edu.neu.csye6200.view;
 import java.awt.BorderLayout;
+import java.awt.Dialog.ModalityType;
 import java.awt.Dimension;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.*;
@@ -17,16 +19,18 @@ import javax.swing.table.DefaultTableModel;
  */
 public class StudentsView extends javax.swing.JPanel {
     
-    public StudentsView(String[] rows, List<Object> students){
-        
-    }
+    private List<Student> studentsList;
+    DefaultTableModel myTM;
     /**
      * Creates new form StudentsView
      */
     public StudentsView() {
         initComponents();
+        studentsList = new ArrayList<Student>();
         postInit();
         addStudentTable();
+        //myTM  = (DefaultTableModel) studentTable.getModel();
+       
     }
 
     /**
@@ -222,11 +226,30 @@ public class StudentsView extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void addStudentThroughCSVButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addStudentThroughCSVButtonActionPerformed
-        // TODO add your handling code here:
+       
+        JFileChooser fileChooser = new JFileChooser();
+        fileChooser.setCurrentDirectory(new File("./"));
+        int result = fileChooser.showOpenDialog(this);
+        if (result == JFileChooser.APPROVE_OPTION)
+        {
+            File selectedFile = fileChooser.getSelectedFile();
+            System.out.println("Selected file: " + selectedFile.getAbsolutePath());
+        }
     }//GEN-LAST:event_addStudentThroughCSVButtonActionPerformed
 
     private void addStudentThroughFormButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addStudentThroughFormButtonActionPerformed
-        // TODO add your handling code here:
+        
+         try 
+         {
+            AddStudentDialog dialog = new AddStudentDialog(studentsList);
+            dialog.setModalityType(ModalityType.APPLICATION_MODAL);
+            dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+            dialog.setVisible(true);
+            
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+        populateTable();
     }//GEN-LAST:event_addStudentThroughFormButtonActionPerformed
 
     private void addStudentButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addStudentButtonActionPerformed
@@ -238,12 +261,12 @@ public class StudentsView extends javax.swing.JPanel {
     }
     
     public void addStudentTable(){
-        DefaultTableModel myTM = new DefaultTableModel();
+        myTM = new DefaultTableModel();
         String[] colTitles = {"ID","first name", "last name"," age"};
-        List<Student> obj = new ArrayList<Student>();
-        for(int i = 0; i< 50; i++){
-            obj.add(new Student("Varun","V",(20+i)));
-        }
+        
+//        for(int i = 0; i< 50; i++){
+//            obj.add(new Student("Varun","V",(20+i)));
+//        }
         /**
          * Set the table columns and their titles
          */
@@ -251,13 +274,26 @@ public class StudentsView extends javax.swing.JPanel {
         myTM.setColumnIdentifiers(colTitles);
         int ix = 0; // use ix as an index, i.e. id for object in table
         
-        for (Student p : obj) {
+        for (Student p : studentsList)
+        {
          
-         myTM.addRow(new Object[]{++ix, p.getFirstName(), p.getLastName(), p.getAge()});
+             myTM.addRow(new Object[]{++ix, p.getFirstName(), p.getLastName(), p.getAge()});
         }
         generateTable(myTM);
         
 }
+    
+    public void populateTable(){
+        
+        myTM.setRowCount(0);
+        int ix = 0;
+        for (Student student : studentsList)
+        {
+         
+             myTM.addRow(new Object[]{++ix, student.getFirstName(), student.getLastName(), student.getAge()});
+        }
+        
+    }
 
     
     public void generateTable(DefaultTableModel myTM){
