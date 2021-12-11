@@ -3,6 +3,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
 package edu.neu.csye6200.view;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.*;
 import javax.swing.event.ListSelectionListener;
 
@@ -12,6 +14,7 @@ import javax.swing.event.ListSelectionListener;
  */
 public class ClassRoomsView extends javax.swing.JPanel {
 
+    List<Object> classRooms = new ArrayList<>();
     /**
      * Creates new form ClassRoomsView
      */
@@ -43,12 +46,14 @@ public class ClassRoomsView extends javax.swing.JPanel {
         groupsLabel = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         groupInfoPanel = new javax.swing.JPanel();
-        teacherLabel = new javax.swing.JLabel();
-        teacherValueLabel = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        teacherTable = new javax.swing.JTable();
+        studentTable = new javax.swing.JTable();
         notePrefix = new javax.swing.JLabel();
         noteValue = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        addStudentToGroupButton = new javax.swing.JButton();
+        teacherLabel = new javax.swing.JLabel();
+        teacherValueLabel = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 255, 255));
 
@@ -118,13 +123,12 @@ public class ClassRoomsView extends javax.swing.JPanel {
                 .addGroup(selectClassroomPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(selectClassroomPanelLayout.createSequentialGroup()
                         .addGap(14, 14, 14)
-                        .addComponent(jLabel1)
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addComponent(jLabel1))
                     .addGroup(selectClassroomPanelLayout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(classRoomSelect, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(addTeacherButton, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(classRoomSelect, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(addTeacherButton, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
             .addGroup(selectClassroomPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(selectClassroomPanelLayout.createSequentialGroup()
@@ -151,23 +155,36 @@ public class ClassRoomsView extends javax.swing.JPanel {
 
         selectGroupPanel.setBackground(new java.awt.Color(255, 255, 255));
 
+        jScrollPane2.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+
         groupsTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null},
+                {null},
+                {null},
+                {null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Name"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        groupsTable.setColumnSelectionAllowed(true);
+        groupsTable.getTableHeader().setReorderingAllowed(false);
         groupsTable.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 groupsTableMouseClicked(evt);
             }
         });
         jScrollPane2.setViewportView(groupsTable);
+        groupsTable.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
 
         groupsLabel.setText("Groups:");
 
@@ -199,73 +216,97 @@ public class ClassRoomsView extends javax.swing.JPanel {
                 .addGroup(selectGroupPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(groupsLabel)
                     .addComponent(jButton1))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 326, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 329, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
         groupInfoPanel.setBackground(new java.awt.Color(255, 255, 255));
 
-        teacherLabel.setFont(new java.awt.Font("Lucida Grande", 0, 15)); // NOI18N
-        teacherLabel.setText("Teacher: ");
-
-        teacherValueLabel.setFont(new java.awt.Font("Lucida Grande", 0, 15)); // NOI18N
-        teacherValueLabel.setText("jLabel4");
-
         jScrollPane1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 
-        teacherTable.setModel(new javax.swing.table.DefaultTableModel(
+        studentTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "ID", "First Name", "Last Name", "Age", "GPA"
             }
-        ));
-        jScrollPane1.setViewportView(teacherTable);
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(studentTable);
 
         notePrefix.setForeground(new java.awt.Color(255, 51, 51));
         notePrefix.setText("Note: Maximum number of students allowed:");
 
         noteValue.setText("<>");
 
+        jLabel2.setText("Students");
+
+        addStudentToGroupButton.setText("+ Add");
+        addStudentToGroupButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                addStudentToGroupButtonActionPerformed(evt);
+            }
+        });
+
+        teacherLabel.setFont(new java.awt.Font("Lucida Grande", 0, 15)); // NOI18N
+        teacherLabel.setText("Teacher: ");
+
+        teacherValueLabel.setFont(new java.awt.Font("Lucida Grande", 0, 15)); // NOI18N
+
         javax.swing.GroupLayout groupInfoPanelLayout = new javax.swing.GroupLayout(groupInfoPanel);
         groupInfoPanel.setLayout(groupInfoPanelLayout);
         groupInfoPanelLayout.setHorizontalGroup(
             groupInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(groupInfoPanelLayout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(groupInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 604, Short.MAX_VALUE)
                     .addGroup(groupInfoPanelLayout.createSequentialGroup()
-                        .addComponent(notePrefix)
+                        .addComponent(teacherLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(noteValue, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(teacherValueLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(addStudentToGroupButton))
                     .addGroup(groupInfoPanelLayout.createSequentialGroup()
-                        .addComponent(teacherLabel)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(teacherValueLabel)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, groupInfoPanelLayout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 604, Short.MAX_VALUE)
+                        .addGroup(groupInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(groupInfoPanelLayout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(notePrefix)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(noteValue, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel2))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         groupInfoPanelLayout.setVerticalGroup(
             groupInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(groupInfoPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(groupInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(teacherLabel)
-                    .addComponent(teacherValueLabel))
-                .addGap(28, 28, 28)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 327, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(groupInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(groupInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(addStudentToGroupButton)
+                        .addComponent(teacherLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(teacherValueLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 298, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(groupInfoPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(notePrefix)
                     .addComponent(noteValue))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(35, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -290,21 +331,24 @@ public class ClassRoomsView extends javax.swing.JPanel {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(selectClassroomPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(46, 46, 46)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(selectGroupPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(groupInfoPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(514, Short.MAX_VALUE))
+                .addContainerGap(473, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
     private void addTeacherButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addTeacherButtonActionPerformed
-
-        selectGroupPanel.setVisible(true);
+        AddClassRoomDialog addClass = new AddClassRoomDialog();
+        addClass.setLocationRelativeTo(null);
+        addClass.setVisible(true);
     }//GEN-LAST:event_addTeacherButtonActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        AddGroupDialog ag = new AddGroupDialog();
+        ag.setLocationRelativeTo(null);
+        ag.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void classRoomSelectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_classRoomSelectActionPerformed
@@ -316,20 +360,40 @@ public class ClassRoomsView extends javax.swing.JPanel {
     }//GEN-LAST:event_classRoomSelectActionPerformed
 
     private void groupsTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_groupsTableMouseClicked
-         JTable source = (JTable)evt.getSource();
+            JTable source = (JTable)evt.getSource();
             int row = source.rowAtPoint( evt.getPoint() );
             int column = source.columnAtPoint( evt.getPoint() );
             String s=source.getModel().getValueAt(row, 0)+"";
-
-            JOptionPane.showMessageDialog(null, s);
+            groupInfoPanel.setVisible(true);
     }//GEN-LAST:event_groupsTableMouseClicked
+
+    private void addStudentToGroupButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addStudentToGroupButtonActionPerformed
+        AddStudentToGroupDialog as = new AddStudentToGroupDialog();
+        as.setLocationRelativeTo(null);
+        as.setVisible(true);
+    }//GEN-LAST:event_addStudentToGroupButtonActionPerformed
     public void postInit(){
         classRoomSelect.setSelectedItem(null);
         selectGroupPanel.setVisible(false);
         groupInfoPanel.setVisible(false);
+        setClassRoomDropDown(new ArrayList());
+    }
+    
+    public void setClassRoomDropDown(List<Object> classRooms){
+        int n = classRooms.size();
+        String[] options = new String[n];
+        for(int i = 0; i< n; i++){
+            options[i] = (String) classRooms.get(i);
+        }
+        classRoomSelect.setModel(new javax.swing.DefaultComboBoxModel<>(options));
+    }
+    
+    public static void handlePostClassroomCreate (JDialog jd){
+        jd.setVisible(false);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton addStudentToGroupButton;
     private javax.swing.JButton addTeacherButton;
     private javax.swing.JComboBox<String> classRoomSelect;
     private javax.swing.JPanel groupInfoPanel;
@@ -337,6 +401,7 @@ public class ClassRoomsView extends javax.swing.JPanel {
     private javax.swing.JTable groupsTable;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
@@ -345,9 +410,9 @@ public class ClassRoomsView extends javax.swing.JPanel {
     private javax.swing.JLabel noteValue;
     private javax.swing.JPanel selectClassroomPanel;
     private javax.swing.JPanel selectGroupPanel;
+    private javax.swing.JTable studentTable;
     private javax.swing.JLabel teacherHeadingLabel;
     private javax.swing.JLabel teacherLabel;
-    private javax.swing.JTable teacherTable;
     private javax.swing.JLabel teacherValueLabel;
     private javax.swing.JLabel totalCount;
     // End of variables declaration//GEN-END:variables
