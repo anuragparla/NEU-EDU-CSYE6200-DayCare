@@ -9,42 +9,42 @@ package edu.neu.csye6200.model;
  * @author anuragparla
  */
 public class Student extends Person {
-
-    public Student(double gpa, String parentName, String address, String phoneNumber, int age, String name) {
-        super(age, name);
+    private double gpa;
+    private String fatherName;
+    private String motherName;
+    private String address;
+    private String phoneNumber;
+    
+    public Student(String firstName, String lastName,int age, double gpa, String fatherName, String motherName, String address, String phoneNumber ) {
+        super(firstName,lastName, age);
         this.gpa = gpa;
-        this.parentName = parentName;
+        //this.parentName = parentName;
+        this.fatherName = fatherName;
+        this.motherName = motherName;
         this.address = address;
         this.phoneNumber = phoneNumber;
     }
-    /*
-    public Student(double gpa, String parentName, String address, String phoneNumber, String data) {
-        super(data);
-        this.gpa = gpa;
-        this.parentName = parentName;
-        this.address = address;
-        this.phoneNumber = phoneNumber;
-    }*/
-    
+        
     public Student(String data) {
         super(data);
         String[] parsedString = data.split(",");
-        setGpa(Double.parseDouble(parsedString[2]));
-        setParentName(parsedString[3]);
-        setAddress(parsedString[4]);
-        setPhoneNumber(parsedString[5]);
+        setGpa(Double.parseDouble(parsedString[3]));
+        setFatherName(parsedString[4]);
+        setMotherName(parsedString[5]);
+        setAddress(parsedString[6]);
+        setPhoneNumber(parsedString[7]);
     }
-    private double gpa;
-    private String parentName;
-    private String address;
-    private String phoneNumber;
-
+    
     public void setGpa(double gpa) {
         this.gpa = gpa;
     }
 
-    public void setParentName(String parentName) {
-        this.parentName = parentName;
+    public void setFatherName(String fatherName) {
+        this.fatherName = fatherName;
+    }
+    
+    public void setMotherName(String motherName) {
+        this.motherName = motherName;
     }
 
     public void setAddress(String address) {
@@ -59,8 +59,12 @@ public class Student extends Person {
         return gpa;
     }
 
-    public String getParentName() {
-        return parentName;
+    public String getFatherName() {
+        return fatherName;
+    }
+    
+    public String getMotherName() {
+        return motherName;
     }
 
     public String getAddress() {

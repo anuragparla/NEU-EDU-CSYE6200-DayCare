@@ -11,15 +11,15 @@ package edu.neu.csye6200.model;
 public class Teacher extends Person{
     private int credits;
 
-    public Teacher(int credits, int age, String name) {
-        super(age, name);
+    public Teacher( String firstName, String lastName, int age, int credits) {
+        super(firstName,lastName, age);
         this.credits = credits;
     }
 
     public Teacher( String data) {
         super(data);
         String[] parsedTeacherData = data.split(",");
-        setCredits(Integer.parseInt(parsedTeacherData[2]));
+        setCredits(Integer.parseInt(parsedTeacherData[3]));
     }
 
     public int getCredits() {

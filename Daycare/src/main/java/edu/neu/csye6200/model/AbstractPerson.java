@@ -12,7 +12,9 @@ public abstract class AbstractPerson {
     
     public abstract void setAge(int age);
     public abstract int getAge(int age);
-    public abstract void setName(String name);
-    public abstract String getName ();
+    public abstract void setFirstName(String firstName);
+    public abstract void setLastName(String lastName);
+    public abstract String getFirstName ();
+    public abstract String getLastName();
     
 }

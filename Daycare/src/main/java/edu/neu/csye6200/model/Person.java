@@ -10,20 +10,23 @@ package edu.neu.csye6200.model;
  */
 public class Person extends AbstractPerson {
     protected int age;
-    protected String name;
+    protected String firstName;
+    protected String lastName;
     
-    public Person(int age, String name) {
+    public Person( String firstName, String lastName, int age) {
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.age = age;
-        this.name = name;
     }
     
     public Person(String data) {
         String[] parsedString = data.split(",");
-        setName(parsedString[0]);
-        setAge(Integer.parseInt(parsedString[1]));
+        setFirstName(parsedString[0]);
+        setLastName(parsedString[1]);
+        setAge(Integer.parseInt(parsedString[2]));
                 
     }
-    
+
     @Override
     public void setAge(int age) {
         this.age = age;
@@ -35,13 +38,25 @@ public class Person extends AbstractPerson {
     }
 
     @Override
-    public void setName(String name) {
-        this.name = name;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
     @Override
-    public String getName() {
-        return name;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
+
+    @Override
+    public String getFirstName() {
+        return firstName;
+    }
+
+    @Override
+    public String getLastName() {
+        return lastName;
+    }
+    
+    
     
 }
