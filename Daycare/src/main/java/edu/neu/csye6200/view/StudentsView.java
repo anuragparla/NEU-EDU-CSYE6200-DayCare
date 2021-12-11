@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
 package edu.neu.csye6200.view;
+import edu.neu.csye6200.util.FileUtil;
 import java.awt.BorderLayout;
 import java.awt.Dialog.ModalityType;
 import java.awt.Dimension;
@@ -12,6 +13,7 @@ import java.util.List;
 import javax.swing.*;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+
 
 /**
  *
@@ -28,7 +30,6 @@ public class StudentsView extends javax.swing.JPanel {
         initComponents();
         studentsList = new ArrayList<Student>();
         postInit();
-        addStudentTable();
         //myTM  = (DefaultTableModel) studentTable.getModel();
        
     }
@@ -54,9 +55,9 @@ public class StudentsView extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         studentTable = new javax.swing.JTable();
         jPanel4 = new javax.swing.JPanel();
+        lblRefresh = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
-        setBounds(new java.awt.Rectangle(10, 0, 0, 0));
         setPreferredSize(new java.awt.Dimension(1486, 907));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
@@ -75,10 +76,9 @@ public class StudentsView extends javax.swing.JPanel {
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
+            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
@@ -129,6 +129,21 @@ public class StudentsView extends javax.swing.JPanel {
                 .addContainerGap())
         );
 
+        jScrollPane1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+
+        studentTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
+            },
+            new String [] {
+                "First Name", "Last Name", "Age", "GPA", "Parent Name", "Address", "Phone Number"
+            }
+        ));
+        jScrollPane1.setViewportView(studentTable);
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -136,11 +151,15 @@ public class StudentsView extends javax.swing.JPanel {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(totalCountLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 1135, Short.MAX_VALUE)
                 .addComponent(addStudentButton, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(27, 27, 27))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1444, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
             .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel3Layout.createSequentialGroup()
                     .addGap(44, 44, 44)
@@ -150,33 +169,23 @@ public class StudentsView extends javax.swing.JPanel {
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(7, 7, 7)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(addStudentButton)
-                    .addComponent(totalCountLabel))
-                .addContainerGap(48, Short.MAX_VALUE))
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(7, 7, 7)
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(addStudentButton)
+                            .addComponent(totalCountLabel))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 207, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
             .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel3Layout.createSequentialGroup()
                     .addGap(50, 50, 50)
                     .addComponent(totalCount)
                     .addContainerGap(34, Short.MAX_VALUE)))
         );
-
-        jScrollPane1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-
-        studentTable.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane1.setViewportView(studentTable);
 
         jPanel4.setBackground(new java.awt.Color(255, 51, 51));
         jPanel4.setForeground(new java.awt.Color(255, 0, 0));
@@ -192,6 +201,13 @@ public class StudentsView extends javax.swing.JPanel {
             .addGap(0, 11, Short.MAX_VALUE)
         );
 
+        lblRefresh.setText("Refresh");
+        lblRefresh.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                lblRefreshActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -205,10 +221,10 @@ public class StudentsView extends javax.swing.JPanel {
                     .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addGap(14, 14, 14)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1444, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(28, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(lblRefresh)
+                .addGap(578, 578, 578))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -219,9 +235,9 @@ public class StudentsView extends javax.swing.JPanel {
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 459, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(266, Short.MAX_VALUE))
+                .addGap(45, 45, 45)
+                .addComponent(lblRefresh)
+                .addContainerGap(453, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -234,6 +250,23 @@ public class StudentsView extends javax.swing.JPanel {
         {
             File selectedFile = fileChooser.getSelectedFile();
             System.out.println("Selected file: " + selectedFile.getAbsolutePath());
+            
+            if(selectedFile.getAbsolutePath().endsWith(".csv"))
+            {
+                 List<String> csvStrings = FileUtil.readCSVFile( selectedFile.getAbsolutePath());
+                 for(String csvString : csvStrings)
+                     studentsList.add(new Student(csvString));
+                 
+                 JOptionPane.showMessageDialog(this, "Added Students Successfully..!", "Added Students", 1);
+                  populateTable();
+                  updateTotalCount();
+                  jPanel2.setVisible(false); 
+            }
+            else{
+               
+                JOptionPane.showMessageDialog(this, "Please select csv files only!!", "CSV file required ", 2);
+            }
+
         }
     }//GEN-LAST:event_addStudentThroughCSVButtonActionPerformed
 
@@ -244,71 +277,63 @@ public class StudentsView extends javax.swing.JPanel {
             AddStudentDialog dialog = new AddStudentDialog(studentsList);
             dialog.setModalityType(ModalityType.APPLICATION_MODAL);
             dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+            dialog.setLocationRelativeTo(null);
             dialog.setVisible(true);
             
         } catch (Exception ex) {
             ex.printStackTrace();
         }
+       
+        jPanel2.setVisible(false);
         populateTable();
+        updateTotalCount();
     }//GEN-LAST:event_addStudentThroughFormButtonActionPerformed
 
     private void addStudentButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addStudentButtonActionPerformed
         
         jPanel2.setVisible(true);
     }//GEN-LAST:event_addStudentButtonActionPerformed
+
+    private void lblRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lblRefreshActionPerformed
+        populateTable();
+    }//GEN-LAST:event_lblRefreshActionPerformed
     public void postInit(){
-        jPanel2.setVisible(false);
-        
+        jPanel2.setVisible(false); 
+        generateTable();
+        updateTotalCount();
+       
     }
     
-    public void addStudentTable(){
-        myTM = new DefaultTableModel();
-        String[] colTitles = {"ID","first name", "last name"," age"};
+    public void generateTable(){
         
-//        for(int i = 0; i< 50; i++){
-//            obj.add(new Student("Varun","V",(20+i)));
-//        }
-        /**
-         * Set the table columns and their titles
-         */
-        myTM.setColumnCount(colTitles.length);
-        myTM.setColumnIdentifiers(colTitles);
-        int ix = 0; // use ix as an index, i.e. id for object in table
-        
-        for (Student p : studentsList)
-        {
-         
-             myTM.addRow(new Object[]{++ix, p.getFirstName(), p.getLastName(), p.getAge()});
-        }
-        generateTable(myTM);
+        myTM = (DefaultTableModel) studentTable.getModel();
+        jScrollPane1.setVisible(false);
+        studentTable.setAutoCreateRowSorter(true);
+        studentTable.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
+        studentTable.setFillsViewportHeight(true);
+        jScrollPane1.setViewportView(studentTable);
+        jScrollPane1.setVisible(true);   
+        populateTable();
         
 }
     
     public void populateTable(){
         
         myTM.setRowCount(0);
-        int ix = 0;
+        int ix = 0; // use ix as an index, i.e. id for object in table
         for (Student student : studentsList)
         {
-         
-             myTM.addRow(new Object[]{++ix, student.getFirstName(), student.getLastName(), student.getAge()});
+            Object[] studentObj = {++ix, student.getFirstName(), student.getLastName(), student.getAge(), student.getGpa(), student.getParentName(), student.getAddress(), student.getPhoneNumber()};
+            myTM.addRow(studentObj);
         }
-        
+    
     }
 
-    
-    public void generateTable(DefaultTableModel myTM){
-        
-        jScrollPane1.setVisible(false);
-        studentTable.setModel(myTM);
-        studentTable.setAutoCreateRowSorter(true);
-        studentTable.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
-        studentTable.setFillsViewportHeight(true);
-        jScrollPane1.setViewportView(studentTable);
-        jScrollPane1.setVisible(true);
-        
+    public void updateTotalCount()
+    {
+        totalCountLabel.setText("Total Count: " + studentsList.size());
     }
-    
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addStudentButton;
@@ -320,6 +345,7 @@ public class StudentsView extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JButton lblRefresh;
     private javax.swing.JTable studentTable;
     private javax.swing.JLabel totalCount;
     private javax.swing.JLabel totalCountLabel;
