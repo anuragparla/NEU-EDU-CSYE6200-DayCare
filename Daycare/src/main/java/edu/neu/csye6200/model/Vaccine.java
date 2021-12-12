@@ -10,45 +10,37 @@ import java.util.Date;
 import java.util.List;
 
 /**
- *
+ 
  * @author anuragparla
  */
 public class Vaccine {
-    private int studentId;
+   
     private String vaccineName;
     private String vaccineDescription;
     private int maxDoses;
     //private Date dateAdministered;
     private LocalDate latestImmunizationDate;
-    private List<List<String>> doseDetails;
+    private List<Dose> doseDetails;
     //private List<ArrayList<Integer>> vaccineList = new ArrayList<ArrayList<>>>();
 
-    public Vaccine(int studentId, String vaccineName, String vaccineDescription,
-                    int maxDoses) {
-        this.studentId = studentId;
+    public Vaccine( String vaccineName, String vaccineDescription, int maxDoses) {
+        
         this.vaccineName = vaccineName;
         this.vaccineDescription = vaccineDescription;
         this.maxDoses = maxDoses;
-        this.doseDetails = new ArrayList<List<String>>();
+        this.doseDetails = new ArrayList<>();
     }
     
     public Vaccine (String csvData) {
         String[] parsedVaccineData = {};
-        setStudentId(Integer.parseInt(parsedVaccineData[0]));
-        setVaccineName(parsedVaccineData[1]);
-        setVaccineDescription(parsedVaccineData[2]);
-        setMaxDoses(Integer.parseInt(parsedVaccineData[3]));
-        setDoseDetails(new ArrayList<List<String>>());
+        setVaccineName(parsedVaccineData[0]);
+        setVaccineDescription(parsedVaccineData[1]);
+        setMaxDoses(Integer.parseInt(parsedVaccineData[2]));
+        this.doseDetails = new ArrayList<>();
+        
     }
 
-    public int getStudentId() {
-        return studentId;
-    }
-
-    public void setStudentId(int studentId) {
-        this.studentId = studentId;
-    }
-
+  
     public String getVaccineName() {
         return vaccineName;
     }
@@ -81,11 +73,11 @@ public class Vaccine {
         this.latestImmunizationDate = latestImmunizationDate;
     }
 
-    public List<List<String>> getDoseDetails() {
+    public List<Dose> getDoseDetails() {
         return doseDetails;
     }
 
-    public void setDoseDetails(List<List<String>> doseDetails) {
+    public void setDoseDetails(List<Dose> doseDetails) {
         this.doseDetails = doseDetails;
     }
     

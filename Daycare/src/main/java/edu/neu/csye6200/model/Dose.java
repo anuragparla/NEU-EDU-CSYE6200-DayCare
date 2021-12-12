@@ -13,7 +13,7 @@ import java.util.Date;
  */
 public class Dose {
     private boolean checkDose;
-    private Date date;
+    private  Date date;
     private Date doseDeadline;
 
     public boolean isCheckDose() {
