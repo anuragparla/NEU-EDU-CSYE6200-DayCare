@@ -4,7 +4,8 @@
  */
 package edu.neu.csye6200.model;
 
-import java.util.Date;
+import java.time.LocalDate;
+//import java.util.Date;
 
 /**
  *
@@ -14,13 +15,14 @@ public interface DayCareModelInterface {
     void createPersonViaCsv(String csvData);
     void createStudentViaForm(String firstName, String lastName,int age, 
                               double gpa,String fatherName, String motherName,
-                              String address,String phoneNumber, Date walkInDate);
+                              String address,String phoneNumber, LocalDate walkInDate);
     void createTeacherViaForm(String firstName, String lastName, int age, 
-                              int credits, Date reviewDate);
+                              int credits, LocalDate reviewDate);
     void addImmunizationRecordViaForm(int studentId, String vaccineName, 
                                String vaccineDescription,int maxDoses);
     
     void addImmunizationRecordViaCsv(String csvData);
+    
     
     
     

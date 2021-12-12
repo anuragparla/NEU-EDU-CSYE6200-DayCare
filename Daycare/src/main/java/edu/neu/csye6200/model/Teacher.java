@@ -15,7 +15,8 @@ public class Teacher extends Person{
     private int credits;
     private LocalDate reviewDate;
     private int teacherId;
-    public Teacher( String firstName, String lastName, int age, int credits, LocalDate reviewDate) {
+    public Teacher( String firstName, String lastName, int age, int credits,
+                    LocalDate reviewDate) {
         super(firstName,lastName, age);
         this.credits = credits;
         this.reviewDate = reviewDate;
@@ -42,5 +43,12 @@ public class Teacher extends Person{
     
     public LocalDate getReviewDate() {
         return reviewDate;
+    }
+    
+    public void setTeacherId() {
+        this.teacherId = teacherId + 100;
+    }
+    public int getTeacherId() {
+        return teacherId;
     }
 }
