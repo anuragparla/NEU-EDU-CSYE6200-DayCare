@@ -4,6 +4,7 @@
  */
 package edu.neu.csye6200.view;
 import edu.neu.csye6200.model.Student;
+import java.time.LocalDate;
 import java.util.List;
 import javax.swing.JOptionPane;
 
@@ -214,6 +215,9 @@ public class AddStudentDialog extends javax.swing.JDialog {
                 .addContainerGap())
         );
 
+        lblValid.setIcon(new javax.swing.ImageIcon("D:\\OOD\\NEU-EDU-CSYE6200-DayCare\\Daycare\\resources\\validInput.png")); // NOI18N
+        lblValid.setText("jLabel2");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -255,7 +259,7 @@ public class AddStudentDialog extends javax.swing.JDialog {
 
         int intAge = Integer.parseInt(age);
         Double doubleGpa = Double.parseDouble(gpa);
-        Student student = new Student(firstName,lastName,intAge,doubleGpa, fatherName, motherName, address,phoneNumber);
+        Student student = new Student(firstName,lastName, intAge, doubleGpa, fatherName, motherName, address,phoneNumber,  LocalDate.now());
         studentsList.add(student);
         JOptionPane.showMessageDialog(this, "Added Student Successfully..!", "Added Student", 1);
 
