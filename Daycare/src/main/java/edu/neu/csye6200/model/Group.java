@@ -13,11 +13,22 @@ import java.util.Vector;
 public class Group {
     
     private String groupName;
-    private int teacherId;
+    private Teacher teacher;
     //private int maxGroups;
-    Vector<Student> studentList;
-    int groupSize;
-
+    private Vector<Student> studentList;
+    private int groupSize;
+    //private 
+    
+    public Group(String groupName, Teacher teacher, Vector<Student> studentList,
+                 int groupSize) {
+        setGroupName(groupName);
+        this.teacher = teacher;
+        setStudentList(studentList);
+        setGroupSize(groupSize);
+        
+        
+    }
+    
     public String getGroupName() {
         return groupName;
     }
@@ -25,15 +36,11 @@ public class Group {
     public void setGroupName(String groupName) {
         this.groupName = groupName;
     }
-
-    public int getTeacherId() {
-        return teacherId;
+    
+    
+    public Teacher getTeacher() {
+        return teacher;
     }
-
-    public void setTeacherId(int teacherId) {
-        this.teacherId = teacherId;
-    }
-
     public Vector<Student> getStudentList() {
         return studentList;
     }
@@ -49,4 +56,6 @@ public class Group {
     public void setGroupSize(int groupSize) {
         this.groupSize = groupSize;
     }
+    
+    
 }
