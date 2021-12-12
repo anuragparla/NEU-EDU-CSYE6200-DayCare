@@ -28,7 +28,7 @@
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="jPanel1" alignment="0" max="32767" attributes="0"/>
+          <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
       </Group>
     </DimensionLayout>
   </Layout>
@@ -46,19 +46,15 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="teacherInput" min="-2" pref="192" max="-2" attributes="0"/>
                       <Component id="confirmAddClassroom" alignment="0" min="-2" pref="113" max="-2" attributes="0"/>
                       <Component id="jLabel1" alignment="0" min="-2" pref="156" max="-2" attributes="0"/>
-                      <Component id="groupSizeLabel" alignment="0" min="-2" pref="243" max="-2" attributes="0"/>
                       <Component id="teacherLabel" alignment="0" min="-2" pref="65" max="-2" attributes="0"/>
                       <Component id="nameLabel" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Component id="jPanel3" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="groupSizeInput" alignment="0" min="-2" pref="192" max="-2" attributes="0"/>
-                      <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                          <Component id="teacherInput" alignment="0" pref="192" max="32767" attributes="0"/>
-                          <Component id="groupNameInput" alignment="0" max="32767" attributes="0"/>
-                      </Group>
+                      <Component id="groupNameInput" alignment="0" min="-2" pref="192" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace max="32767" attributes="0"/>
+                  <EmptySpace pref="57" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -77,13 +73,9 @@
                   <Component id="teacherLabel" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="teacherInput" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
-                  <Component id="groupSizeLabel" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace max="-2" attributes="0"/>
-                  <Component id="groupSizeInput" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                   <Component id="confirmAddClassroom" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace pref="14" max="32767" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -132,13 +124,6 @@
             <Property name="text" type="java.lang.String" value="Teacher"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="groupSizeInput">
-        </Component>
-        <Component class="javax.swing.JLabel" name="groupSizeLabel">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Group size"/>
-          </Properties>
-        </Component>
         <Component class="javax.swing.JButton" name="confirmAddClassroom">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
@@ -161,6 +146,9 @@
               </StringArray>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="teacherInputActionPerformed"/>
+          </Events>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
           </AuxValues>

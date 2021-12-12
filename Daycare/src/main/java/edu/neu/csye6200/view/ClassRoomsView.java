@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.swing.*;
 import javax.swing.event.ListSelectionListener;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -15,6 +16,7 @@ import javax.swing.event.ListSelectionListener;
 public class ClassRoomsView extends javax.swing.JPanel {
 
     List<Object> classRooms = new ArrayList<>();
+    DefaultTableModel groupDtm;
     /**
      * Creates new form ClassRoomsView
      */
@@ -357,6 +359,7 @@ public class ClassRoomsView extends javax.swing.JPanel {
         cb.setSelectedItem(name);
         selectGroupPanel.setVisible(true);
         noteValue.setText(name);
+//        populateGroupTable(new ArrayList());
     }//GEN-LAST:event_classRoomSelectActionPerformed
 
     private void groupsTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_groupsTableMouseClicked
@@ -376,7 +379,8 @@ public class ClassRoomsView extends javax.swing.JPanel {
         classRoomSelect.setSelectedItem(null);
         selectGroupPanel.setVisible(false);
         groupInfoPanel.setVisible(false);
-        setClassRoomDropDown(new ArrayList());
+//        setClassRoomDropDown(new ArrayList());
+        groupDtm = (DefaultTableModel) groupsTable.getModel();
     }
     
     public void setClassRoomDropDown(List<Object> classRooms){
@@ -391,7 +395,20 @@ public class ClassRoomsView extends javax.swing.JPanel {
     public static void handlePostClassroomCreate (JDialog jd){
         jd.setVisible(false);
     }
-
+        
+    public void populateGroupTable(List<Object> groups){
+        int n = groups.size();
+        String[] options = new String[n];
+        groupDtm.setRowCount(0);
+//        for (Student p : studentsList)
+//        {
+//         
+//             groupDtm.addRow(new Object[]{++ix, p.getFirstName(), p.getLastName(), p.getAge()});
+//        }
+        groupsTable.setModel(groupDtm);
+    }
+    
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton addStudentToGroupButton;
     private javax.swing.JButton addTeacherButton;

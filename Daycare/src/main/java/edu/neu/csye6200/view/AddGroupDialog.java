@@ -4,6 +4,11 @@
  */
 package edu.neu.csye6200.view;
 
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author varun
@@ -15,6 +20,7 @@ public class AddGroupDialog extends javax.swing.JDialog {
      */
     public AddGroupDialog() {
         initComponents();
+        postInit();
     }
 
     /**
@@ -32,8 +38,6 @@ public class AddGroupDialog extends javax.swing.JDialog {
         nameLabel = new javax.swing.JLabel();
         groupNameInput = new javax.swing.JTextField();
         teacherLabel = new javax.swing.JLabel();
-        groupSizeInput = new javax.swing.JTextField();
-        groupSizeLabel = new javax.swing.JLabel();
         confirmAddClassroom = new javax.swing.JButton();
         teacherInput = new javax.swing.JComboBox<>();
 
@@ -67,8 +71,6 @@ public class AddGroupDialog extends javax.swing.JDialog {
 
         teacherLabel.setText("Teacher");
 
-        groupSizeLabel.setText("Group size");
-
         confirmAddClassroom.setBackground(new java.awt.Color(255, 102, 102));
         confirmAddClassroom.setText("Confirm");
         confirmAddClassroom.addActionListener(new java.awt.event.ActionListener() {
@@ -78,6 +80,11 @@ public class AddGroupDialog extends javax.swing.JDialog {
         });
 
         teacherInput.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        teacherInput.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                teacherInputActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -86,17 +93,14 @@ public class AddGroupDialog extends javax.swing.JDialog {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(15, 15, 15)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(teacherInput, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(confirmAddClassroom, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(groupSizeLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(teacherLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(nameLabel)
                     .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(groupSizeInput, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(teacherInput, javax.swing.GroupLayout.Alignment.LEADING, 0, 192, Short.MAX_VALUE)
-                        .addComponent(groupNameInput, javax.swing.GroupLayout.Alignment.LEADING)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(groupNameInput, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(57, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -113,13 +117,9 @@ public class AddGroupDialog extends javax.swing.JDialog {
                 .addComponent(teacherLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(teacherInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(groupSizeLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(groupSizeInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(20, 20, 20)
                 .addComponent(confirmAddClassroom)
-                .addContainerGap(14, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -130,7 +130,7 @@ public class AddGroupDialog extends javax.swing.JDialog {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -141,9 +141,16 @@ public class AddGroupDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_groupNameInputActionPerformed
 
     private void confirmAddClassroomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmAddClassroomActionPerformed
-        
+        String groupName = groupNameInput.getText();
+        String teacherName = (String) teacherInput.getSelectedItem();
         ClassRoomsView.handlePostClassroomCreate(this);
     }//GEN-LAST:event_confirmAddClassroomActionPerformed
+
+    private void teacherInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_teacherInputActionPerformed
+        JComboBox cb = (JComboBox)evt.getSource();
+        String name = (String)cb.getSelectedItem();
+        cb.setSelectedItem(name);
+    }//GEN-LAST:event_teacherInputActionPerformed
 
     /**
      * @param args the command line arguments
@@ -186,12 +193,23 @@ public class AddGroupDialog extends javax.swing.JDialog {
             }
         });
     }
+    
+    public void postInit(){
+        setGroupsDropDown(new ArrayList());
+    }
+    
+    public void setGroupsDropDown(List<Object> groups){
+        int n = groups.size();
+        String[] options = new String[n];
+        for(int i = 0; i< n; i++){
+            options[i] = (String) groups.get(i);
+        }
+        teacherInput.setModel(new javax.swing.DefaultComboBoxModel<>(options));
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton confirmAddClassroom;
     private javax.swing.JTextField groupNameInput;
-    private javax.swing.JTextField groupSizeInput;
-    private javax.swing.JLabel groupSizeLabel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;

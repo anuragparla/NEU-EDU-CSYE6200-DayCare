@@ -17,6 +17,7 @@ public class AddClassRoomDialog extends javax.swing.JDialog {
      */
     public AddClassRoomDialog() {
         initComponents();
+        postInit();
     }
 
     /**
@@ -38,6 +39,7 @@ public class AddClassRoomDialog extends javax.swing.JDialog {
         maxGroupInput = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         confirmAddClassroom = new javax.swing.JButton();
+        errorLabel = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -79,24 +81,31 @@ public class AddClassRoomDialog extends javax.swing.JDialog {
             }
         });
 
+        errorLabel.setForeground(new java.awt.Color(255, 51, 51));
+        errorLabel.setText("Only number fields are allowed");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(15, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(maxGroupInput, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(confirmAddClassroom, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addComponent(ageHigherInput, javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 65, Short.MAX_VALUE))
-                    .addComponent(maxGroupInput, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addComponent(ageLowerInput, javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(ageFromLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addComponent(ageFromLabel, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addComponent(errorLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(77, 77, 77))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -113,13 +122,15 @@ public class AddClassRoomDialog extends javax.swing.JDialog {
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(ageHigherInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(12, 12, 12)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(maxGroupInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(errorLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
                 .addComponent(confirmAddClassroom)
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -130,18 +141,26 @@ public class AddClassRoomDialog extends javax.swing.JDialog {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void confirmAddClassroomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmAddClassroomActionPerformed
-        String ageLower = ageLowerInput.getText();
-        String ageHigher = ageHigherInput.getText();
-        int groupSize = Integer.parseInt(maxGroupInput.getText());
-        JOptionPane.showMessageDialog(this, "Classroom added successfully");
-        ClassRoomsView.handlePostClassroomCreate(this);
+        try{
+            int ageLower = Integer.parseInt(ageLowerInput.getText());
+            int ageHigher = Integer.parseInt(ageHigherInput.getText());
+            int groupSize = Integer.parseInt(maxGroupInput.getText());
+            JOptionPane.showMessageDialog(this, "Classroom added successfully");
+            ClassRoomsView.handlePostClassroomCreate(this);
+        }catch(NumberFormatException e){
+            errorLabel.setVisible(true);
+            e.printStackTrace();
+        }
+        
     }//GEN-LAST:event_confirmAddClassroomActionPerformed
 
     private void ageLowerInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ageLowerInputActionPerformed
@@ -189,12 +208,16 @@ public class AddClassRoomDialog extends javax.swing.JDialog {
             }
         });
     }
+    public void postInit(){
+        errorLabel.setVisible(false);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel ageFromLabel;
     private javax.swing.JTextField ageHigherInput;
     private javax.swing.JTextField ageLowerInput;
     private javax.swing.JButton confirmAddClassroom;
+    private javax.swing.JLabel errorLabel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
