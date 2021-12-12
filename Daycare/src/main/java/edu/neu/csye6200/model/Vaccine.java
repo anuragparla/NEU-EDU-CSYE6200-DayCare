@@ -81,18 +81,9 @@ public class Vaccine {
         this.doseDetails = doseDetails;
     }
     
-    
-    public void injectShot() {
-        
+    public void addDose(Dose dose)
+    {
+        doseDetails.add(dose);
     }
-    
-    public boolean checkDosesGiven() {
-        return false;
-    }
-    
-    
-    
-    
-    
 }   
 

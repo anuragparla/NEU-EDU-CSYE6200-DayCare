@@ -27,12 +27,11 @@ public class TeachersView extends javax.swing.JPanel {
      */
     DefaultTableModel myTM;
     private List<Teacher> teachersList;
-    public TeachersView() {
+    public TeachersView(List<Teacher> teachersList) {
         initComponents();
-        this.teachersList = new ArrayList<>();
+        this.teachersList = teachersList;
         postInit();
-        
-        
+       
     }
 
     /**
