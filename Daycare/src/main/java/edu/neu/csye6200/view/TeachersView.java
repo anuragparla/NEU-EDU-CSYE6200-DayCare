@@ -4,6 +4,7 @@
  */
 package edu.neu.csye6200.view;
 
+import edu.neu.csye6200.model.Teacher;
 import edu.neu.csye6200.util.FileUtil;
 import java.awt.Dialog;
 import java.io.File;

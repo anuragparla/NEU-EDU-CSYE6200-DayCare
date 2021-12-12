@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package edu.neu.csye6200.model;
+import java.util.List;
 
 /**
  *
@@ -14,6 +15,7 @@ public class Student extends Person {
     private String motherName;
     private String address;
     private String phoneNumber;
+    private List<Vaccine> vaccineList;
     
     public Student(String firstName, String lastName,int age, double gpa, String fatherName, String motherName, String address, String phoneNumber ) {
         super(firstName,lastName, age);
@@ -73,6 +75,11 @@ public class Student extends Person {
 
     public String getPhoneNumber() {
         return phoneNumber;
+    }
+    
+    public void addVaccine(Vaccine vaccine)
+    {
+        vaccineList.add(vaccine);
     }
     
     

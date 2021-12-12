@@ -1,6 +1,4 @@
-
- 
-package edu.neu.csye6200.model;
+ package edu.neu.csye6200.model;
 
 /**
 
@@ -32,7 +30,7 @@ public class Person extends AbstractPerson {
     }
 
     @Override
-    public int getAge(int age) {
+    public int getAge() {
         return age;
     }
 

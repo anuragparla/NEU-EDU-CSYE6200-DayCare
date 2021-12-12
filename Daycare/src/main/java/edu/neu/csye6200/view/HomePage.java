@@ -1,9 +1,8 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package edu.neu.csye6200.view;
 
+
+import edu.neu.csye6200.controller.DB4OUtil;
+import edu.neu.csye6200.model.DayCare;
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Color;
@@ -20,11 +19,15 @@ import javax.swing.JOptionPane;
  */
 public class HomePage extends javax.swing.JFrame {
 
+    private DayCare dayCare;
+    DB4OUtil db4OUtil;
     /**
      * Creates new form HomePage
      */
     public HomePage() {
         initComponents();
+        db4OUtil = DB4OUtil.getInstance();
+        dayCare =db4OUtil.retrieveSystem();
         postInit();
     }
 
@@ -210,14 +213,15 @@ public class HomePage extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void studentMenuButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_studentMenuButtonActionPerformed
-       jPanel2.removeAll();
-       jPanel2.setVisible(false);
-        StudentsView s1 = new StudentsView();
+        jPanel2.removeAll();
+        jPanel2.setVisible(false);
+        StudentsView s1 = new StudentsView(dayCare.getStudentsList());
         s1.setSize(1480,900);
         s1.setVisible(true);
         jPanel2.setSize(jPanel2.getPreferredSize().height, jPanel2.getPreferredSize().width);
         jPanel2.add(s1);
         jPanel2.setVisible(true);
+        db4OUtil.storeSystem(dayCare);
         
 //        CardLayout layout = (CardLayout) jPanel2.getLayout();
 //        layout.next(jPanel2);
@@ -249,11 +253,12 @@ public class HomePage extends javax.swing.JFrame {
         c1.setVisible(true);
         jPanel2.setSize(jPanel2.getPreferredSize().height, jPanel2.getPreferredSize().width);
         jPanel2.add(c1); 
-        
         jPanel2.setVisible(true);
     }//GEN-LAST:event_classroomMenuButtonActionPerformed
 
-    public void postInit(){
+    public void postInit()
+    {
+        
         jFrame1.setVisible(false);
         jFrame1.setUndecorated(true);
         jFrame1.setSize(1920, 1080);
