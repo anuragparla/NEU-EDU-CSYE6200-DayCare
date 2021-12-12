@@ -4,9 +4,9 @@
  */
 package edu.neu.csye6200.model;
 import java.util.List;
-
+import edu.neu.csye6200.util.DateUtil;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
+import java.util.Date;
 //import java.util.Date;
 
 /**
@@ -20,12 +20,12 @@ public class Student extends Person {
     private String address;
     private String phoneNumber;
     private  int studentId ;
-    private LocalDate walkInDate;
+    private Date walkInDate;
     private List<Vaccine> vaccineList;
     
     public Student(String firstName, String lastName,int age, double gpa, 
                    String fatherName, String motherName, String address,
-                   String phoneNumber, LocalDate walkInDate ) {
+                   String phoneNumber, Date walkInDate ) {
         super(firstName,lastName, age);
         this.gpa = gpa;
         this.fatherName = fatherName;
@@ -43,10 +43,8 @@ public class Student extends Person {
         setMotherName(parsedString[5]);
         setAddress(parsedString[6]);
         setPhoneNumber(parsedString[7]);
-        //SimpleDateFormat formatter = new SimpleDateFormat("dd-MMM-yyyy", Locale.ENGLISH);
-        setWalkInDate(LocalDate.parse(parsedString[8]));
-        //Date date = formatter.parse(dateInString);
-        //setWalkInDate(LocalDate.parse(parsedString[8]));
+        setWalkInDate(DateUtil.parseStringToDate(parsedString[8], "yyyy-mm-dd"));
+        
     }
     
     public void setGpa(double gpa) {
@@ -102,11 +100,11 @@ public class Student extends Person {
     }
     
     
-    public void setWalkInDate(LocalDate walkInDate) {
+    public void setWalkInDate(Date walkInDate) {
         this.walkInDate = walkInDate;
     }
     
-    public LocalDate getWalkInDate() {
+    public Date getWalkInDate() {
         return walkInDate;
     }
 }

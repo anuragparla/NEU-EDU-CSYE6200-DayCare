@@ -4,8 +4,9 @@
  */
 package edu.neu.csye6200.model;
 
-import java.time.LocalDate;
-//import java.util.Date;
+
+import edu.neu.csye6200.util.DateUtil;
+import java.util.Date;
 
 /**
  *
@@ -13,10 +14,10 @@ import java.time.LocalDate;
  */
 public class Teacher extends Person{
     private int credits;
-    private LocalDate reviewDate;
+    private Date reviewDate;
     private int teacherId;
     public Teacher( String firstName, String lastName, int age, int credits,
-                    LocalDate reviewDate) {
+                    Date reviewDate) {
         super(firstName,lastName, age);
         this.credits = credits;
         this.reviewDate = reviewDate;
@@ -26,7 +27,7 @@ public class Teacher extends Person{
         super(data);
         String[] parsedTeacherData = data.split(",");
         setCredits(Integer.parseInt(parsedTeacherData[3]));
-        setReviewDate(LocalDate.parse(parsedTeacherData[4]));
+        setReviewDate(DateUtil.parseStringToDate(parsedTeacherData[4], "yyyy-mm-dd"));
     }
 
     public int getCredits() {
@@ -37,11 +38,11 @@ public class Teacher extends Person{
         this.credits = credits;
     }
 
-    public void setReviewDate(LocalDate reviewDate) {
+    public void setReviewDate(Date reviewDate) {
         this.reviewDate = reviewDate;
     }
     
-    public LocalDate getReviewDate() {
+    public Date getReviewDate() {
         return reviewDate;
     }
     

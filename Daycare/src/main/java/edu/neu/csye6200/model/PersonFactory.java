@@ -4,7 +4,7 @@
  */
 package edu.neu.csye6200.model;
 
-import java.time.LocalDate;
+import java.util.Date;
 
 /**
  *
@@ -26,7 +26,7 @@ public class PersonFactory {
     
     public Person create(String firstName, String lastName, int age,
                          double gpa, String fatherName, String motherName,
-                         String address, String phoneNumber, LocalDate walkInDate) {
+                         String address, String phoneNumber, Date walkInDate) {
         
         return new Student(firstName, lastName, age, gpa, fatherName,
                             motherName, address, phoneNumber, walkInDate);
@@ -34,7 +34,7 @@ public class PersonFactory {
     }
     
     public Person create(String firstName, String lastName, int age,
-                         int credits, LocalDate reviewDate) {
+                         int credits, Date reviewDate) {
         
         return new Teacher(firstName, lastName, age, credits, reviewDate);
             

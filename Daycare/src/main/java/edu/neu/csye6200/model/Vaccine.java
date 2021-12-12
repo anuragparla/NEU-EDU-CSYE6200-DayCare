@@ -10,11 +10,11 @@ import java.util.Date;
 import java.util.List;
 
 /**
- *
+ 
  * @author anuragparla
  */
 public class Vaccine {
-    private int studentId;
+   
     private String vaccineName;
     private String vaccineDescription;
     private int maxDoses;
@@ -23,9 +23,8 @@ public class Vaccine {
     private List<Dose> doseDetails;
     //private List<ArrayList<Integer>> vaccineList = new ArrayList<ArrayList<>>>();
 
-    public Vaccine(int studentId, String vaccineName, String vaccineDescription,
-                    int maxDoses) {
-        this.studentId = studentId;
+    public Vaccine( String vaccineName, String vaccineDescription, int maxDoses) {
+        
         this.vaccineName = vaccineName;
         this.vaccineDescription = vaccineDescription;
         this.maxDoses = maxDoses;
@@ -34,22 +33,14 @@ public class Vaccine {
     
     public Vaccine (String csvData) {
         String[] parsedVaccineData = {};
-        setStudentId(Integer.parseInt(parsedVaccineData[0]));
-        setVaccineName(parsedVaccineData[1]);
-        setVaccineDescription(parsedVaccineData[2]);
-        setMaxDoses(Integer.parseInt(parsedVaccineData[3]));
+        setVaccineName(parsedVaccineData[0]);
+        setVaccineDescription(parsedVaccineData[1]);
+        setMaxDoses(Integer.parseInt(parsedVaccineData[2]));
         this.doseDetails = new ArrayList<>();
         
     }
 
-    public int getStudentId() {
-        return studentId;
-    }
-
-    public void setStudentId(int studentId) {
-        this.studentId = studentId;
-    }
-
+  
     public String getVaccineName() {
         return vaccineName;
     }

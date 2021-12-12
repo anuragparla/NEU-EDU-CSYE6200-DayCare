@@ -5,7 +5,7 @@
 package edu.neu.csye6200.view;
 
 import edu.neu.csye6200.model.Teacher;
-import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 import javax.swing.JOptionPane;
 
@@ -177,7 +177,7 @@ public class AddTeacherDialog extends javax.swing.JDialog {
         
         int intAge = Integer.parseInt(age);
         int intCredits = Integer.parseInt(credits);
-        Teacher teacher = new Teacher(firstName, lastName,intAge, intCredits, LocalDate.now());
+        Teacher teacher = new Teacher(firstName, lastName,intAge, intCredits, new Date());
         teachersList.add(teacher);
         JOptionPane.showMessageDialog(this, "Added Teacher Successfully..!", "Added Student", 1);
 

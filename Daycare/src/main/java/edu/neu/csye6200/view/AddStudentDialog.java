@@ -4,7 +4,7 @@
  */
 package edu.neu.csye6200.view;
 import edu.neu.csye6200.model.Student;
-import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 import javax.swing.JOptionPane;
 
@@ -259,7 +259,7 @@ public class AddStudentDialog extends javax.swing.JDialog {
 
         int intAge = Integer.parseInt(age);
         Double doubleGpa = Double.parseDouble(gpa);
-        Student student = new Student(firstName,lastName, intAge, doubleGpa, fatherName, motherName, address,phoneNumber,  LocalDate.now());
+        Student student = new Student(firstName,lastName, intAge, doubleGpa, fatherName, motherName, address,phoneNumber,  new Date());
         studentsList.add(student);
         JOptionPane.showMessageDialog(this, "Added Student Successfully..!", "Added Student", 1);
 
