@@ -4,6 +4,7 @@
  */
 package edu.neu.csye6200.model;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -18,7 +19,7 @@ public class Vaccine {
     private String vaccineDescription;
     private int maxDoses;
     //private Date dateAdministered;
-    private Date latestImmunizationDate;
+    private LocalDate latestImmunizationDate;
     private List<List<String>> doseDetails;
     //private List<ArrayList<Integer>> vaccineList = new ArrayList<ArrayList<>>>();
 
@@ -72,11 +73,11 @@ public class Vaccine {
         this.maxDoses = maxDoses;
     }
 
-    public Date getLatestImmunizationDate() {
+    public LocalDate getLatestImmunizationDate() {
         return latestImmunizationDate;
     }
 
-    public void setLatestImmunizationDate(Date latestImmunizationDate) {
+    public void setLatestImmunizationDate(LocalDate latestImmunizationDate) {
         this.latestImmunizationDate = latestImmunizationDate;
     }
 
