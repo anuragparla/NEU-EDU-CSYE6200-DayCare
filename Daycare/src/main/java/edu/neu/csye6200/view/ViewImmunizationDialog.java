@@ -42,11 +42,12 @@ public class ViewImmunizationDialog extends javax.swing.JDialog {
         jScrollPane1 = new javax.swing.JScrollPane();
         vaccineTable = new javax.swing.JTable();
         lblSelectVaccine = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        cbVaccineList = new javax.swing.JComboBox<>();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Imunization Records");
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -63,7 +64,12 @@ public class ViewImmunizationDialog extends javax.swing.JDialog {
 
         lblSelectVaccine.setText("Select Vaccine");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbVaccineList.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        cbVaccineList.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbVaccineListActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -75,7 +81,7 @@ public class ViewImmunizationDialog extends javax.swing.JDialog {
                         .addGap(136, 136, 136)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblSelectVaccine, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(cbVaccineList, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(121, 121, 121)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 670, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -87,7 +93,7 @@ public class ViewImmunizationDialog extends javax.swing.JDialog {
                 .addGap(28, 28, 28)
                 .addComponent(lblSelectVaccine)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(cbVaccineList, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(53, 53, 53)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(189, Short.MAX_VALUE))
@@ -97,7 +103,7 @@ public class ViewImmunizationDialog extends javax.swing.JDialog {
 
         jLabel1.setFont(new java.awt.Font("Segoe UI Historic", 0, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 0, 0));
-        jLabel1.setText("<Student Name> Imunization records");
+        jLabel1.setText("Name: <Student Name> AGE: <AGE>");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -135,11 +141,23 @@ public class ViewImmunizationDialog extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void cbVaccineListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbVaccineListActionPerformed
+
+        int index = cbVaccineList.getSelectedIndex();
+        if(index != -1)
+        {
+            String slectedItem = cbVaccineList.getSelectedItem().toString();
+            populateTable(slectedItem);
+        }
+        
+    }//GEN-LAST:event_cbVaccineListActionPerformed
+
   
         
     public void postInit()
     {
         generateTable();
+        populateComboBox();
     }
      public void generateTable(){
         
@@ -150,29 +168,43 @@ public class ViewImmunizationDialog extends javax.swing.JDialog {
         vaccineTable.setFillsViewportHeight(true);
         jScrollPane1.setViewportView(vaccineTable);
         jScrollPane1.setVisible(true);   
-        populateTable();
+        
         
 }
      
-     public void populateTable(){
+     public void populateTable( String selectedVaccine){
          
         myTM.setRowCount(0);
         //int ix = 0; // use ix as an index, i.e. id for object in table
         for (Vaccine vaccine : student.getVaccineList())
         {
+           
             String vaccineName = vaccine.getVaccineName();
-            for(Dose dose : vaccine.getDoseDetails())
-            {
-                 Object[] studentObj = {vaccineName, dose.getDoseNumber(), dose.getDate()};
-                 myTM.addRow(studentObj);
-                
-            }  
+            if(selectedVaccine.equalsIgnoreCase("all") || vaccineName.equalsIgnoreCase(selectedVaccine)){
+                for(Dose dose : vaccine.getDoseDetails())
+                {
+                     Object[] studentObj = {vaccineName, dose.getDoseNumber(), dose.getDate()};
+                     myTM.addRow(studentObj);
+
+                }  
+            }
         }
+     }
+     
+     public void populateComboBox()
+     {
+         cbVaccineList.removeAllItems();
+         
+         cbVaccineList.addItem("All");
+         for(Vaccine vaccine: student.getVaccineList())
+         {
+             cbVaccineList.addItem(vaccine.getVaccineName());
+         }
      }
              
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> cbVaccineList;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
