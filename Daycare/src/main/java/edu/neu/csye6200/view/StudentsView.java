@@ -383,7 +383,32 @@ public class StudentsView extends javax.swing.JPanel {
     }//GEN-LAST:event_lblRefreshActionPerformed
 
     private void btnViewImmunizationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnViewImmunizationActionPerformed
-        
+
+    int row = studentTable.getSelectedRow();
+    if(row == -1)
+    {
+        JOptionPane.showMessageDialog(this, "Please select a student from table!!", "Select a student", 2);
+        return;
+    }
+    
+    try 
+    {
+
+       Student student = studentsList.get(row);
+       ViewImmunizationDialog dialog = new ViewImmunizationDialog(student);
+       dialog.setModalityType(ModalityType.APPLICATION_MODAL);
+       dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+       dialog.setLocationRelativeTo(null);
+       dialog.setVisible(true);
+
+    } 
+    catch (Exception ex) {
+       ex.printStackTrace();
+    }
+    jPanel6.setVisible(false);
+    
+    
+            
         
         
     }//GEN-LAST:event_btnViewImmunizationActionPerformed

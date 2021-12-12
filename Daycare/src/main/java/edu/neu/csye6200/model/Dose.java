@@ -12,16 +12,15 @@ import java.util.Date;
  * this class is responsible for the details related to the dose date 
  */
 public class Dose {
-    private boolean checkDose;
+    private int doseNumber;
     private  Date date;
-    private Date doseDeadline;
 
-    public boolean isCheckDose() {
-        return checkDose;
+    public int getDoseNumber() {
+        return doseNumber;
     }
 
-    public void setCheckDose(boolean checkDose) {
-        this.checkDose = checkDose;
+    public void setDoseNumber(int doseNumber) {
+        this.doseNumber = doseNumber;
     }
 
     public Date getDate() {
@@ -31,19 +30,10 @@ public class Dose {
     public void setDate(Date date) {
         this.date = date;
     }
-
-    public Date getDoseDeadline() {
-        return doseDeadline;
-    }
-
-    public void setDoseDeadline(Date doseDeadline) {
-        this.doseDeadline = doseDeadline;
-    }
-
-    public Dose(boolean checkDose, Date date, Date doseDeadline) {
-        this.checkDose = checkDose;
+    
+    public Dose(int doseNumber, Date date) {
+        this.doseNumber = doseNumber;
         this.date = date;
-        this.doseDeadline = doseDeadline;
     }
     
     

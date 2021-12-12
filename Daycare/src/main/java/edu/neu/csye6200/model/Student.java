@@ -6,6 +6,7 @@ package edu.neu.csye6200.model;
 import java.util.List;
 import edu.neu.csye6200.util.DateUtil;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 //import java.util.Date;
 
@@ -33,6 +34,7 @@ public class Student extends Person {
         this.address = address;
         this.phoneNumber = phoneNumber;
         this.walkInDate = walkInDate;
+        this.vaccineList = new ArrayList<>();
     }
         
     public Student(String data) {
@@ -44,6 +46,7 @@ public class Student extends Person {
         setAddress(parsedString[6]);
         setPhoneNumber(parsedString[7]);
         setWalkInDate(DateUtil.parseStringToDate(parsedString[8], "yyyy-mm-dd"));
+        this.vaccineList = new ArrayList<>();
         
     }
     
@@ -107,4 +110,9 @@ public class Student extends Person {
     public Date getWalkInDate() {
         return walkInDate;
     }
+
+    public List<Vaccine> getVaccineList() {
+        return vaccineList;
+    }
+    
 }

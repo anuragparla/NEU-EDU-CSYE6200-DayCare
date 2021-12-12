@@ -262,6 +262,7 @@ public class AddStudentDialog extends javax.swing.JDialog {
         Student student = new Student(firstName,lastName, intAge, doubleGpa, fatherName, motherName, address,phoneNumber,  new Date());
         studentsList.add(student);
         JOptionPane.showMessageDialog(this, "Added Student Successfully..!", "Added Student", 1);
+        dispose();
 
     }//GEN-LAST:event_btnAddStudentActionPerformed
 

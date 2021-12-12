@@ -180,6 +180,7 @@ public class AddTeacherDialog extends javax.swing.JDialog {
         Teacher teacher = new Teacher(firstName, lastName,intAge, intCredits, new Date());
         teachersList.add(teacher);
         JOptionPane.showMessageDialog(this, "Added Teacher Successfully..!", "Added Student", 1);
+        dispose();
 
     }//GEN-LAST:event_btnAddTeacherActionPerformed
 

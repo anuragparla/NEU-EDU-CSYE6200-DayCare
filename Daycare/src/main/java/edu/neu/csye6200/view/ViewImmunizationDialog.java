@@ -4,19 +4,30 @@
  */
 package edu.neu.csye6200.view;
 
+import edu.neu.csye6200.model.Dose;
+import edu.neu.csye6200.model.Student;
+import edu.neu.csye6200.model.Vaccine;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author santh
  */
 public class ViewImmunizationDialog extends javax.swing.JDialog {
 
+    private Student student;
+    DefaultTableModel myTM;
     /**
      * Creates new form ViewImmunizationDialog
      */
-    public ViewImmunizationDialog(java.awt.Frame parent, boolean modal) {
-        super(parent, modal);
+    public ViewImmunizationDialog(Student student) {
+       
+        this.student = student;
         initComponents();
+        postInit();
     }
+   
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -29,7 +40,7 @@ public class ViewImmunizationDialog extends javax.swing.JDialog {
 
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        vaccineTable = new javax.swing.JTable();
         lblSelectVaccine = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox<>();
         jPanel2 = new javax.swing.JPanel();
@@ -39,22 +50,16 @@ public class ViewImmunizationDialog extends javax.swing.JDialog {
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        vaccineTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, ""},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+
             },
             new String [] {
-                "Vaccine Name", "Dose", "Due date"
+                "Vaccine Name", "Dose Number", "Date"
             }
         ));
-        jTable1.setShowGrid(true);
-        jScrollPane1.setViewportView(jTable1);
+        vaccineTable.setShowGrid(true);
+        jScrollPane1.setViewportView(vaccineTable);
 
         lblSelectVaccine.setText("Select Vaccine");
 
@@ -131,6 +136,40 @@ public class ViewImmunizationDialog extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
   
+        
+    public void postInit()
+    {
+        generateTable();
+    }
+     public void generateTable(){
+        
+        myTM = (DefaultTableModel) vaccineTable.getModel();
+        jScrollPane1.setVisible(false);
+        vaccineTable.setAutoCreateRowSorter(true);
+        vaccineTable.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
+        vaccineTable.setFillsViewportHeight(true);
+        jScrollPane1.setViewportView(vaccineTable);
+        jScrollPane1.setVisible(true);   
+        populateTable();
+        
+}
+     
+     public void populateTable(){
+         
+        myTM.setRowCount(0);
+        //int ix = 0; // use ix as an index, i.e. id for object in table
+        for (Vaccine vaccine : student.getVaccineList())
+        {
+            String vaccineName = vaccine.getVaccineName();
+            for(Dose dose : vaccine.getDoseDetails())
+            {
+                 Object[] studentObj = {vaccineName, dose.getDoseNumber(), dose.getDate()};
+                 myTM.addRow(studentObj);
+                
+            }  
+        }
+     }
+             
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> jComboBox1;
@@ -138,7 +177,7 @@ public class ViewImmunizationDialog extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JLabel lblSelectVaccine;
+    private javax.swing.JTable vaccineTable;
     // End of variables declaration//GEN-END:variables
 }

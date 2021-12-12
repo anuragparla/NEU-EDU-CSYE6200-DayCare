@@ -4,7 +4,9 @@
  */
 package edu.neu.csye6200.view;
 
+import edu.neu.csye6200.model.Dose;
 import edu.neu.csye6200.model.Student;
+import edu.neu.csye6200.model.Vaccine;
 import java.util.Date;
 import javax.swing.JOptionPane;
 
@@ -14,11 +16,14 @@ import javax.swing.JOptionPane;
  */
 public class AddImmunizationDialog extends javax.swing.JDialog {
 
+    
+    private Student student;
     /**
      * Creates new form AddImmunizationDialog
      */
     public AddImmunizationDialog(Student student) 
     {
+        this.student = student;
         initComponents();
     }
 
@@ -33,9 +38,9 @@ public class AddImmunizationDialog extends javax.swing.JDialog {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        comboBoxVaccineName = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
-        jComboBox2 = new javax.swing.JComboBox<>();
+        comboBoxDoseNumber = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
         btnAddVaccine = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
@@ -47,11 +52,11 @@ public class AddImmunizationDialog extends javax.swing.JDialog {
 
         jLabel1.setText("Vaccine");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Hib", "DTaP", "Polio", "Hepatitis B", "MMR", "Varicella", "Tdap", "Meningococcal" }));
+        comboBoxVaccineName.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Hib", "DTaP", "Polio", "Hepatitis B", "MMR", "Varicella", "Tdap", "Meningococcal" }));
 
         jLabel2.setText("Dose");
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5" }));
+        comboBoxDoseNumber.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "1", "2", "3", "4", "5" }));
 
         jLabel3.setText("Date");
 
@@ -78,15 +83,15 @@ public class AddImmunizationDialog extends javax.swing.JDialog {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(31, 31, 31)
                                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 208, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(jLabel3)
-                                .addComponent(jLabel2)
-                                .addComponent(jComboBox1, 0, 226, Short.MAX_VALUE)
-                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jComboBox2, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                            .addComponent(dateChooser, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(dateChooser, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(comboBoxVaccineName, javax.swing.GroupLayout.Alignment.LEADING, 0, 226, Short.MAX_VALUE)
+                                .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(comboBoxDoseNumber, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(273, 273, 273)
+                        .addGap(289, 289, 289)
                         .addComponent(btnAddVaccine)))
                 .addGap(99, 270, Short.MAX_VALUE))
         );
@@ -98,18 +103,18 @@ public class AddImmunizationDialog extends javax.swing.JDialog {
                 .addGap(31, 31, 31)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(comboBoxVaccineName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(29, 29, 29)
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(comboBoxDoseNumber, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(27, 27, 27)
                 .addComponent(jLabel3)
                 .addGap(11, 11, 11)
                 .addComponent(dateChooser, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(147, 147, 147)
+                .addGap(88, 88, 88)
                 .addComponent(btnAddVaccine)
-                .addContainerGap(30, Short.MAX_VALUE))
+                .addContainerGap(89, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -133,18 +138,26 @@ public class AddImmunizationDialog extends javax.swing.JDialog {
         if(date == null)
         {
              JOptionPane.showMessageDialog(this, "Please select date!!", "Date Missing", 2);
-            return
+            return;
         }
         
+        int doseNumber = Integer.parseInt(comboBoxDoseNumber.getSelectedItem().toString());
+        String VaccineName = comboBoxVaccineName.getSelectedItem().toString();
+        Dose dose = new Dose(doseNumber,date);
+        Vaccine vaccine = new Vaccine(VaccineName, VaccineName, 4);
+        vaccine.addDose(dose);
+        student.addVaccine(vaccine);
+        JOptionPane.showMessageDialog(this, "Added vaccine Successfully..!", "Added Vacine", 1);
+        dispose();
     }//GEN-LAST:event_btnAddVaccineActionPerformed
 
    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAddVaccine;
+    private javax.swing.JComboBox<String> comboBoxDoseNumber;
+    private javax.swing.JComboBox<String> comboBoxVaccineName;
     private com.toedter.calendar.JDateChooser dateChooser;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
