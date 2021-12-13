@@ -165,7 +165,8 @@ public class AddImmunizationDialog extends javax.swing.JDialog {
     {
 
         boolean vaccineExists = false;
-        Vaccine newVaccine = new Vaccine(vaccineName, vaccineName, 5);
+        int maxDose = immunizationRequirements.get(vaccineName);
+        Vaccine newVaccine = new Vaccine(vaccineName, vaccineName, maxDose);
         for(Vaccine vaccine : student.getVaccineList())
         {
             if(vaccine.getVaccineName().equals(vaccineName))
@@ -176,6 +177,7 @@ public class AddImmunizationDialog extends javax.swing.JDialog {
             }
         }
         newVaccine.addDose(dose);
+        newVaccine.setLatestImmunizationDate(dose.getDate());
         if(!vaccineExists)
             student.addVaccine(newVaccine);
         
@@ -218,12 +220,14 @@ public class AddImmunizationDialog extends javax.swing.JDialog {
     public  int getMinDoseCount(String VaccineName)
     {
         int min = 1;
+        
+        System.out.println("as " + VaccineName);
         for(Vaccine vaccine : student.getVaccineList())
         {
-        
+            System.out.println("sa " + vaccine.getVaccineName());
             if( vaccine.getVaccineName().equalsIgnoreCase(VaccineName))
             {
-                   return vaccine.getDoseDetails().size();
+                   return vaccine.getDoseDetails().size() +1 ;
             } 
         }
             

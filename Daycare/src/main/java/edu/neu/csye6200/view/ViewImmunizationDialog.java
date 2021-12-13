@@ -7,6 +7,7 @@ package edu.neu.csye6200.view;
 import edu.neu.csye6200.model.Dose;
 import edu.neu.csye6200.model.Student;
 import edu.neu.csye6200.model.Vaccine;
+import edu.neu.csye6200.util.DateUtil;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
@@ -186,7 +187,8 @@ public class ViewImmunizationDialog extends javax.swing.JDialog {
             if(selectedVaccine.equalsIgnoreCase("all") || vaccineName.equalsIgnoreCase(selectedVaccine)){
                 for(Dose dose : vaccine.getDoseDetails())
                 {
-                     Object[] studentObj = {vaccineName, dose.getDoseNumber(), dose.getDate()};
+                    String date = DateUtil.parseDateToString(dose.getDate(), "yyyy-mm-dd");
+                     Object[] studentObj = {vaccineName, dose.getDoseNumber(), date};
                      myTM.addRow(studentObj);
 
                 }  

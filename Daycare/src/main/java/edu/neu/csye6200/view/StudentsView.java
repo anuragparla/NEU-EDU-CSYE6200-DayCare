@@ -8,11 +8,13 @@ import edu.neu.csye6200.util.FileUtil;
 import edu.neu.csye6200.model.Student;
 import edu.neu.csye6200.model.Vaccine;
 import edu.neu.csye6200.util.DateUtil;
+import edu.neu.csye6200.util.VaccineRules;
 import java.awt.BorderLayout;
 import java.awt.Dialog.ModalityType;
 import java.awt.Dimension;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import javax.swing.*;
 import javax.swing.JTable;
@@ -525,7 +527,11 @@ public class StudentsView extends javax.swing.JPanel {
         String date = parsedVaccineData[2];
         
         boolean vaccineExists = false;
-        Vaccine newVaccine = new Vaccine(vaccineName, vaccineName, 5);
+        HashMap<String, Integer>  immunizationRequirements = VaccineRules.getImmunizationRequirements(student.getAge());
+        if(! immunizationRequirements.containsKey(immunizationRequirements))
+            return;
+        int maxDoses = immunizationRequirements.get(vaccineName);
+        Vaccine newVaccine = new Vaccine(vaccineName, vaccineName, maxDoses);
         for(Vaccine vaccine : student.getVaccineList())
         {
             if(vaccine.getVaccineName().equals(vaccineName))
@@ -537,6 +543,7 @@ public class StudentsView extends javax.swing.JPanel {
         }
         Dose dose = new Dose(doseNumber,DateUtil.parseStringToDate(date, "yyyy-mm-dd"));
         newVaccine.addDose(dose);
+        newVaccine.setLatestImmunizationDate(dose.getDate());
         if(!vaccineExists)
             student.addVaccine(newVaccine);
         
