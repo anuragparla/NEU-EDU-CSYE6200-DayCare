@@ -23,6 +23,8 @@
 ---
 - Netbeans 12.6
 - JDK 11 or above
+- DB4O.jar 
+- Jcalendar.jar
 
 ---
 
