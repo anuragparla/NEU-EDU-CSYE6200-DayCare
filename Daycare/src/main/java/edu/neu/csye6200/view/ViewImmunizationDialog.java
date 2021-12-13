@@ -12,7 +12,7 @@ import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author santh
+ * @author deveshi
  */
 public class ViewImmunizationDialog extends javax.swing.JDialog {
 

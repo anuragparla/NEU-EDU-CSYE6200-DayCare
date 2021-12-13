@@ -8,7 +8,7 @@ import edu.neu.csye6200.model.DayCare;
 
 /**
  *
- * @author SanthoshMaddi
+ * @author deveshi
  */
 public class ConfigureDayCare 
 {

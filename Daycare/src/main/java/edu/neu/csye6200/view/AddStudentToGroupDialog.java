@@ -4,20 +4,28 @@
  */
 package edu.neu.csye6200.view;
 
+import edu.neu.csye6200.controller.DB4OUtil;
+import edu.neu.csye6200.model.DayCare;
+import edu.neu.csye6200.model.Student;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
 
 /**
  *
- * @author varun
+ * @author hiral
  */
 public class AddStudentToGroupDialog extends javax.swing.JDialog {
-
+    DayCare daycare;
+    ClassRoomsView cview;
+    DB4OUtil db40Util = DB4OUtil.getInstance();
     /**
      * Creates new form AddStudentToGroupDialog
      */
-    public AddStudentToGroupDialog() {
+    public AddStudentToGroupDialog(DayCare daycare, ClassRoomsView cview) {
+        this.daycare = daycare;
+        this.cview = cview;
         initComponents();
         postInit();
     }
@@ -128,69 +136,38 @@ public class AddStudentToGroupDialog extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void confirmAddToGroupActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmAddToGroupActionPerformed
-        String studentName = (String)selectStudentInput.getSelectedItem();
+        int studentName = selectStudentInput.getSelectedIndex();
+        Student s = daycare.getStudentsList().get(studentName);
+        daycare.getClassRoomsList().get(cview.selectedClassIndex).getGroups().get(cview.selectedGroupIndex).getStudentList().add(s);
+        cview.populateStudentTable();
+        cview.checkMaxLimitForGroup();
+        JOptionPane.showMessageDialog(this, "Added Student Successfully");
         ClassRoomsView.handlePostClassroomCreate(this);
+        db40Util.storeSystem(daycare);
     }//GEN-LAST:event_confirmAddToGroupActionPerformed
 
     private void selectStudentInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectStudentInputActionPerformed
         JComboBox cb = (JComboBox)evt.getSource();
         String name = (String)cb.getSelectedItem();
         cb.setSelectedItem(name);
+        cview.populateStudentTable();
     }//GEN-LAST:event_selectStudentInputActionPerformed
 
-    public void setStudentsDropDown(List<Object> students){
+    public void setStudentsDropDown(){
+        List<Student> students = daycare.getStudentsList();
         int n = students.size();
         String[] options = new String[n];
         for(int i = 0; i< n; i++){
-            options[i] = (String) students.get(i);
+            options[i] = students.get(i).getFirstName()+" "+students.get(i).getLastName();
         }
         selectStudentInput.setModel(new javax.swing.DefaultComboBoxModel<>(options));
     }
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(AddStudentToGroupDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(AddStudentToGroupDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(AddStudentToGroupDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(AddStudentToGroupDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
 
-        /* Create and display the dialog */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                AddStudentToGroupDialog dialog = new AddStudentToGroupDialog();
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
-            }
-        });
+    public void postInit(){
+        setStudentsDropDown();
     }
     
-    public void postInit(){
-        setStudentsDropDown(new ArrayList());
-    }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton confirmAddToGroup;

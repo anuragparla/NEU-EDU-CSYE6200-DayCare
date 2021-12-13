@@ -4,8 +4,14 @@
  */
 package edu.neu.csye6200.view;
 
+import edu.neu.csye6200.controller.DB4OUtil;
+import edu.neu.csye6200.model.DayCare;
+import edu.neu.csye6200.model.Group;
+import edu.neu.csye6200.model.Student;
+import edu.neu.csye6200.model.Teacher;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Vector;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 
@@ -14,11 +20,17 @@ import javax.swing.JOptionPane;
  * @author varun
  */
 public class AddGroupDialog extends javax.swing.JDialog {
-
+    DayCare daycare;
+    int selectedClassroom;
+    ClassRoomsView cview;
+    DB4OUtil db4OUtil = DB4OUtil.getInstance();
     /**
      * Creates new form AddGroupDialog
      */
-    public AddGroupDialog() {
+    public AddGroupDialog(DayCare daycare, int selectedClassroom, ClassRoomsView cv) {
+        this.daycare = daycare;
+        this.selectedClassroom = selectedClassroom;
+        cview = cv;
         initComponents();
         postInit();
     }
@@ -38,7 +50,7 @@ public class AddGroupDialog extends javax.swing.JDialog {
         nameLabel = new javax.swing.JLabel();
         groupNameInput = new javax.swing.JTextField();
         teacherLabel = new javax.swing.JLabel();
-        confirmAddClassroom = new javax.swing.JButton();
+        confirmAddGroup = new javax.swing.JButton();
         teacherInput = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -71,11 +83,11 @@ public class AddGroupDialog extends javax.swing.JDialog {
 
         teacherLabel.setText("Teacher");
 
-        confirmAddClassroom.setBackground(new java.awt.Color(255, 102, 102));
-        confirmAddClassroom.setText("Confirm");
-        confirmAddClassroom.addActionListener(new java.awt.event.ActionListener() {
+        confirmAddGroup.setBackground(new java.awt.Color(255, 102, 102));
+        confirmAddGroup.setText("Confirm");
+        confirmAddGroup.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                confirmAddClassroomActionPerformed(evt);
+                confirmAddGroupActionPerformed(evt);
             }
         });
 
@@ -94,7 +106,7 @@ public class AddGroupDialog extends javax.swing.JDialog {
                 .addGap(15, 15, 15)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(teacherInput, javax.swing.GroupLayout.PREFERRED_SIZE, 192, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(confirmAddClassroom, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(confirmAddGroup, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(teacherLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(nameLabel)
@@ -118,7 +130,7 @@ public class AddGroupDialog extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(teacherInput, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(20, 20, 20)
-                .addComponent(confirmAddClassroom)
+                .addComponent(confirmAddGroup)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -140,75 +152,40 @@ public class AddGroupDialog extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_groupNameInputActionPerformed
 
-    private void confirmAddClassroomActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmAddClassroomActionPerformed
+    private void confirmAddGroupActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmAddGroupActionPerformed
         String groupName = groupNameInput.getText();
-        String teacherName = (String) teacherInput.getSelectedItem();
+        int teacherName = teacherInput.getSelectedIndex();
+        Group group = new Group(groupName, daycare.getTeachersList().get(teacherName), new Vector<Student>(), daycare.getClassRoomsList().get(selectedClassroom).getMaxGroup());
+        daycare.getClassRoomsList().get(selectedClassroom).getGroups().add(group);
+        cview.populateGroupTable();
+        JOptionPane.showMessageDialog(this, "Group Added Successfully");
         ClassRoomsView.handlePostClassroomCreate(this);
-    }//GEN-LAST:event_confirmAddClassroomActionPerformed
+        cview.checkMaxLimitForGroupAddition();
+        db4OUtil.storeSystem(daycare);
+    }//GEN-LAST:event_confirmAddGroupActionPerformed
 
     private void teacherInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_teacherInputActionPerformed
         JComboBox cb = (JComboBox)evt.getSource();
         String name = (String)cb.getSelectedItem();
         cb.setSelectedItem(name);
     }//GEN-LAST:event_teacherInputActionPerformed
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(AddGroupDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(AddGroupDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(AddGroupDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(AddGroupDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the dialog */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                AddGroupDialog dialog = new AddGroupDialog();
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
-            }
-        });
-    }
     
     public void postInit(){
-        setGroupsDropDown(new ArrayList());
+        setTeacherDropDown();
     }
     
-    public void setGroupsDropDown(List<Object> groups){
-        int n = groups.size();
+    public void setTeacherDropDown(){
+        List<Teacher> teachers = daycare.getTeachersList();
+        int n = teachers.size();
         String[] options = new String[n];
         for(int i = 0; i< n; i++){
-            options[i] = (String) groups.get(i);
+            options[i] = (String) teachers.get(i).getFirstName()+" "+teachers.get(i).getLastName();
         }
         teacherInput.setModel(new javax.swing.DefaultComboBoxModel<>(options));
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton confirmAddClassroom;
+    private javax.swing.JButton confirmAddGroup;
     private javax.swing.JTextField groupNameInput;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
