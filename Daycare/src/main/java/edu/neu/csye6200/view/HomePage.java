@@ -249,12 +249,13 @@ public class HomePage extends javax.swing.JFrame {
     private void classroomMenuButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_classroomMenuButtonActionPerformed
         jPanel2.removeAll();
         jPanel2.setVisible(false);
-        ClassRoomsView c1 = new ClassRoomsView();
+        ClassRoomsView c1 = new ClassRoomsView(dayCare);
         c1.setSize(1480, 900);
         c1.setVisible(true);
         jPanel2.setSize(jPanel2.getPreferredSize().height, jPanel2.getPreferredSize().width);
         jPanel2.add(c1); 
         jPanel2.setVisible(true);
+        db4OUtil.storeSystem(dayCare);
     }//GEN-LAST:event_classroomMenuButtonActionPerformed
 
     public void postInit()

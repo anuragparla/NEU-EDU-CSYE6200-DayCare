@@ -47,7 +47,7 @@
                   <EmptySpace min="-2" pref="15" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="teacherInput" min="-2" pref="192" max="-2" attributes="0"/>
-                      <Component id="confirmAddClassroom" alignment="0" min="-2" pref="113" max="-2" attributes="0"/>
+                      <Component id="confirmAddGroup" alignment="0" min="-2" pref="113" max="-2" attributes="0"/>
                       <Component id="jLabel1" alignment="0" min="-2" pref="156" max="-2" attributes="0"/>
                       <Component id="teacherLabel" alignment="0" min="-2" pref="65" max="-2" attributes="0"/>
                       <Component id="nameLabel" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -74,7 +74,7 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="teacherInput" min="-2" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
-                  <Component id="confirmAddClassroom" min="-2" max="-2" attributes="0"/>
+                  <Component id="confirmAddGroup" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
@@ -124,7 +124,7 @@
             <Property name="text" type="java.lang.String" value="Teacher"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JButton" name="confirmAddClassroom">
+        <Component class="javax.swing.JButton" name="confirmAddGroup">
           <Properties>
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="66" green="66" red="ff" type="rgb"/>
@@ -132,7 +132,7 @@
             <Property name="text" type="java.lang.String" value="Confirm"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="confirmAddClassroomActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="confirmAddGroupActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JComboBox" name="teacherInput">

@@ -14,14 +14,15 @@ public class Classroom {
     private int ageLower;
     private int ageHigher;
     private int maxGroup;
+    private String name;
     
-    public Classroom( int ageLower, int ageHigher, int maxGroup) {
+    public Classroom( int ageLower, int ageHigher, int maxGroup, String name) {
         Vector<Group> groups = new Vector<>();
         setGroups(groups);
         setAgeLower(ageLower);
         setAgeHigher(ageHigher);
         setMaxGroup(maxGroup);
-        
+        setName(name);
         
     }
 
@@ -55,5 +56,13 @@ public class Classroom {
 
     public void setMaxGroup(int maxGroup) {
         this.maxGroup = maxGroup;
+    }
+    
+    public void setName(String name){
+        this.name= name;
+    }
+    
+    public String getName(){
+        return this.name;
     }
 }
