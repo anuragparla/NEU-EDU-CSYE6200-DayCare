@@ -204,9 +204,9 @@ public class HomePage extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel2)
-                .addGap(49, 49, 49)
+                .addGap(60, 60, 60)
                 .addComponent(studentMenuButton)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(teacherMenuButton)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(classroomMenuButton)
@@ -307,7 +307,7 @@ public class HomePage extends javax.swing.JFrame {
 
     public void postInit()
     {
-        AlertController.generateTeacherAlerts(dayCare.getTeachersList());
+        //AlertController.generateTeacherAlerts(dayCare.getTeachersList());
         jFrame1.setVisible(false);
         jFrame1.setUndecorated(true);
         jFrame1.setSize(1920, 1080);
@@ -364,6 +364,7 @@ public class HomePage extends javax.swing.JFrame {
     
     public void populateTable(){
         
+        AlertController.generateAllALerts(dayCare);
         alertDtm.setRowCount(0);
         int ix = 0; // use ix as an index, i.e. id for object in table
         AlertRecords a = AlertRecords.getInstance();

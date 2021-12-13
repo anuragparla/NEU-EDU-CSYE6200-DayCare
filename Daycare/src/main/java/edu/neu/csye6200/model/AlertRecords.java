@@ -28,4 +28,9 @@ public class AlertRecords {
         return alerts;
     }
     
+    public void clearRecords()
+    {
+         alerts = new Vector<>();
+    }
+    
 }
