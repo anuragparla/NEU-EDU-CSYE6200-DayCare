@@ -3,9 +3,11 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
 package edu.neu.csye6200.view;
+import edu.neu.csye6200.model.Dose;
 import edu.neu.csye6200.util.FileUtil;
 import edu.neu.csye6200.model.Student;
 import edu.neu.csye6200.model.Vaccine;
+import edu.neu.csye6200.util.DateUtil;
 import java.awt.BorderLayout;
 import java.awt.Dialog.ModalityType;
 import java.awt.Dimension;
@@ -417,6 +419,14 @@ public class StudentsView extends javax.swing.JPanel {
 
     private void btnCsvAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCsvAddActionPerformed
        
+        int row = studentTable.getSelectedRow();
+        if(row == -1)
+        {
+            JOptionPane.showMessageDialog(this, "Please select a student from table!!", "Select a student", 2);
+            return;
+        }
+        Student student = studentsList.get(row);
+        
         JFileChooser fileChooser = new JFileChooser();
         fileChooser.setCurrentDirectory(new File("./"));
         int result = fileChooser.showOpenDialog(this);
@@ -429,9 +439,9 @@ public class StudentsView extends javax.swing.JPanel {
             {
                  List<String> csvStrings = FileUtil.readCSVFile( selectedFile.getAbsolutePath());
                  for(String csvString : csvStrings)
-                     
-                     //studentsList.add(new Vaccine(csvString));
-           
+                     addVaccine(student, csvString);
+                    
+                    
                 JOptionPane.showMessageDialog(this, "Added Vaccinations Successfully..!", "Added Students", 1);
                 populateTable();
                 updateTotalCount();
@@ -505,6 +515,31 @@ public class StudentsView extends javax.swing.JPanel {
             myTM.addRow(studentObj);
         }
     
+    }
+    
+    public void addVaccine(Student student, String csvString)
+    {
+        String[] parsedVaccineData = csvString.split(",");
+        String vaccineName = parsedVaccineData[0];
+        int doseNumber = Integer.parseInt(parsedVaccineData[1]);
+        String date = parsedVaccineData[2];
+        
+        boolean vaccineExists = false;
+        Vaccine newVaccine = new Vaccine(vaccineName, vaccineName, 5);
+        for(Vaccine vaccine : student.getVaccineList())
+        {
+            if(vaccine.getVaccineName().equals(vaccineName))
+            {
+                newVaccine = vaccine;
+                vaccineExists = true;
+                break;
+            }
+        }
+        Dose dose = new Dose(doseNumber,DateUtil.parseStringToDate(date, "yyyy-mm-dd"));
+        newVaccine.addDose(dose);
+        if(!vaccineExists)
+            student.addVaccine(newVaccine);
+        
     }
 
     public void updateTotalCount()
