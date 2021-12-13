@@ -65,6 +65,7 @@ public class HomePage extends javax.swing.JFrame {
         studentMenuButton = new javax.swing.JButton();
         alertsDialogButton = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
+        jLabel6 = new javax.swing.JLabel();
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -243,15 +244,26 @@ public class HomePage extends javax.swing.JFrame {
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 6, 1480, -1));
 
+        jPanel2.setBackground(new java.awt.Color(220, 244, 253));
+        jPanel2.setForeground(new java.awt.Color(153, 204, 255));
+
+        jLabel6.setIcon(new javax.swing.ImageIcon("/Users/varun/Documents/Northeastern/CSYE 6200/Project/New proj/NEU-EDU-CSYE6200-DayCare/Daycare/src/main/java/edu/neu/csye6200/view/10459_Happy-colorful-hands-Smiley-face-on-the-hands.jpeg")); // NOI18N
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1480, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(188, Short.MAX_VALUE)
+                .addComponent(jLabel6)
+                .addGap(162, 162, 162))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 830, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(104, Short.MAX_VALUE)
+                .addComponent(jLabel6)
+                .addGap(91, 91, 91))
         );
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 77, 1480, 830));
@@ -276,7 +288,8 @@ public class HomePage extends javax.swing.JFrame {
     private void alertsDialogButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_alertsDialogButtonActionPerformed
         
         jDialog1.pack();
-        jDialog1.setSize(jDialog1.getPreferredSize().width*2, jDialog1.getPreferredSize().height*2);
+        jDialog1.setSize(jDialog1.getPreferredSize().width, jDialog1.getPreferredSize().height);
+        jDialog1.setLocationRelativeTo(null);
         populateTable();
         jDialog1.setVisible(true);
     }//GEN-LAST:event_alertsDialogButtonActionPerformed
@@ -388,6 +401,7 @@ public class HomePage extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
