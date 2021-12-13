@@ -6,6 +6,7 @@ package edu.neu.csye6200.model;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 //import java.util.Date;
 import java.util.List;
 
@@ -37,7 +38,7 @@ public class DayCareModel implements DayCareModelInterface{
     public void createStudentViaForm(String firstName, String lastName, 
                                      int age, double gpa, String fatherName, 
                                      String motherName, String address, 
-                                     String phoneNumber, LocalDate walkInDate) {
+                                     String phoneNumber, Date walkInDate) {
         PersonFactory p;
         p = PersonFactoryProvider.getFactory("Student");
         studentList.add(p.create(firstName,lastName, age, gpa,
@@ -47,19 +48,19 @@ public class DayCareModel implements DayCareModelInterface{
     @Override
     public void createTeacherViaForm(String firstName, String lastName, 
                                      int age, int credits, 
-                                     LocalDate reviewDate) {
+                                     Date reviewDate) {
         PersonFactory p;
          p = PersonFactoryProvider.getFactory("Teacher");
          teacherList.add(p.create(firstName,lastName, age, credits, reviewDate));
     }
 
     @Override
-    public void addImmunizationRecordViaForm(int studentId, String vaccineName,
+    public void addImmunizationRecordViaForm(String vaccineName,
                                              String vaccineDescription, 
                                              int maxDoses) {
         VaccineFactory v ;
         v = VaccineFactoryProvider.getFactory("Vaccine");
-        vaccineList.add(v.create(studentId, vaccineName, vaccineDescription, 
+        vaccineList.add(v.create( vaccineName, vaccineDescription, 
                                  maxDoses));
                                                  
         

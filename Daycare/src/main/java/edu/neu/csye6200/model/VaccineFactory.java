@@ -14,9 +14,9 @@ public class VaccineFactory {
         return new Vaccine(csvData);
     }
     
-   public Vaccine create(int studentId, String vaccineName, 
+   public Vaccine create(String vaccineName, 
                           String vaccineDescription,int maxDoses) {
-        return new Vaccine (studentId,vaccineName,vaccineDescription,maxDoses);
+        return new Vaccine (vaccineName,vaccineDescription,maxDoses);
     }
 
     

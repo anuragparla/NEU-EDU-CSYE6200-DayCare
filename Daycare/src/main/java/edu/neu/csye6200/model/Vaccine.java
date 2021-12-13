@@ -19,7 +19,7 @@ public class Vaccine {
     private String vaccineDescription;
     private int maxDoses;
     //private Date dateAdministered;
-    private LocalDate latestImmunizationDate;
+    private Date latestImmunizationDate;
     private List<Dose> doseDetails;
     //private List<ArrayList<Integer>> vaccineList = new ArrayList<ArrayList<>>>();
 
@@ -32,7 +32,7 @@ public class Vaccine {
     }
     
     public Vaccine (String csvData) {
-        String[] parsedVaccineData = {};
+        String[] parsedVaccineData = csvData.split(",");
         setVaccineName(parsedVaccineData[0]);
         setVaccineDescription(parsedVaccineData[1]);
         setMaxDoses(Integer.parseInt(parsedVaccineData[2]));
@@ -65,11 +65,11 @@ public class Vaccine {
         this.maxDoses = maxDoses;
     }
 
-    public LocalDate getLatestImmunizationDate() {
+    public Date getLatestImmunizationDate() {
         return latestImmunizationDate;
     }
 
-    public void setLatestImmunizationDate(LocalDate latestImmunizationDate) {
+    public void setLatestImmunizationDate(Date latestImmunizationDate) {
         this.latestImmunizationDate = latestImmunizationDate;
     }
 
