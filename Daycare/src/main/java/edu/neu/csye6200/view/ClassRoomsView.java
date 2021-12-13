@@ -422,6 +422,10 @@ public class ClassRoomsView extends javax.swing.JPanel {
         checkMaxLimitForGroup();
     }
     
+    public void setDefaultClassRoom(){
+        classRoomSelect.setSelectedItem(null);
+    }
+    
     public void setClassRoomDropDown(List<Classroom> classRooms){
         int n = classRooms.size();
         System.out.println(n);

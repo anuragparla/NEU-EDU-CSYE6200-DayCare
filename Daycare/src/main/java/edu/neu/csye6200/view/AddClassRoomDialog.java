@@ -163,6 +163,11 @@ public class AddClassRoomDialog extends javax.swing.JDialog {
             dayCare.getClassRoomsList().add(c);
             db4OUtil.storeSystem(dayCare);
             ClassRoomsView.handlePostClassroomCreate(this);
+            cv.setClassRoomDropDown(dayCare.getClassRoomsList());
+            if(dayCare.getClassRoomsList().size()==1){
+                cv.setDefaultClassRoom();
+            }
+            
         }catch(NumberFormatException e){
             errorLabel.setVisible(true);
             e.printStackTrace();
