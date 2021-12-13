@@ -4,6 +4,7 @@ package edu.neu.csye6200.view;
 import edu.neu.csye6200.model.Dose;
 import edu.neu.csye6200.model.Student;
 import edu.neu.csye6200.model.Vaccine;
+import edu.neu.csye6200.util.DateUtil;
 import edu.neu.csye6200.util.VaccineRules;
 import java.util.Date;
 import java.util.HashMap;
@@ -27,6 +28,7 @@ public class AddImmunizationDialog extends javax.swing.JDialog {
         this.student = student;
         immunizationRequirements  = VaccineRules.getImmunizationRequirements(student.getAge());
         initComponents();
+        populateLabel();
         populateComboBox();
     }
 
@@ -46,7 +48,7 @@ public class AddImmunizationDialog extends javax.swing.JDialog {
         comboBoxDoseNumber = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
         btnAddVaccine = new javax.swing.JButton();
-        jLabel4 = new javax.swing.JLabel();
+        labelTitle = new javax.swing.JLabel();
         dateChooser = new com.toedter.calendar.JDateChooser();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -76,9 +78,9 @@ public class AddImmunizationDialog extends javax.swing.JDialog {
             }
         });
 
-        jLabel4.setFont(new java.awt.Font("Segoe UI Semibold", 1, 18)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(255, 0, 0));
-        jLabel4.setText("<Student Name>   <AGE>");
+        labelTitle.setFont(new java.awt.Font("Segoe UI Semibold", 1, 18)); // NOI18N
+        labelTitle.setForeground(new java.awt.Color(255, 0, 0));
+        labelTitle.setText("<Student Name>   <AGE>");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -98,7 +100,7 @@ public class AddImmunizationDialog extends javax.swing.JDialog {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 389, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(labelTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 389, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(204, 204, 204)
                         .addComponent(btnAddVaccine)))
@@ -108,7 +110,7 @@ public class AddImmunizationDialog extends javax.swing.JDialog {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel4)
+                .addComponent(labelTitle)
                 .addGap(55, 55, 55)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -153,23 +155,43 @@ public class AddImmunizationDialog extends javax.swing.JDialog {
         int doseNumber = Integer.parseInt(comboBoxDoseNumber.getSelectedItem().toString());
         String VaccineName = comboBoxVaccineName.getSelectedItem().toString();
         Dose dose = new Dose(doseNumber,date);
-        Vaccine vaccine = new Vaccine(VaccineName, VaccineName, 4);
-        vaccine.addDose(dose);
-        student.addVaccine(vaccine);
+        addVaccine(VaccineName, dose);
         JOptionPane.showMessageDialog(this, "Added vaccine Successfully..!", "Added Vacine", 1);
         dispose();
     }//GEN-LAST:event_btnAddVaccineActionPerformed
 
+    
+    public void addVaccine(String vaccineName, Dose dose)
+    {
+
+        boolean vaccineExists = false;
+        Vaccine newVaccine = new Vaccine(vaccineName, vaccineName, 5);
+        for(Vaccine vaccine : student.getVaccineList())
+        {
+            if(vaccine.getVaccineName().equals(vaccineName))
+            {
+                newVaccine = vaccine;
+                vaccineExists = true;
+                break;
+            }
+        }
+        newVaccine.addDose(dose);
+        if(!vaccineExists)
+            student.addVaccine(newVaccine);
+        
+    }
     
     private void comboBoxVaccineNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxVaccineNameActionPerformed
         
         int index = comboBoxVaccineName.getSelectedIndex();
         if(index != -1)
         {
-            String slectedItem = comboBoxVaccineName.getSelectedItem().toString();
-            int maxDoses = immunizationRequirements.get(slectedItem);
+            String selectedItem = comboBoxVaccineName.getSelectedItem().toString();
+            int maxDoses = immunizationRequirements.get(selectedItem);
+            int minDose  = getMinDoseCount(selectedItem);
             comboBoxDoseNumber.removeAllItems();
-            for(int i = 1; i<=maxDoses;i++)
+            System.out.println(minDose);
+            for(int i = minDose; i<=maxDoses;i++)
             {
                 comboBoxDoseNumber.addItem(String.valueOf(i));
             }
@@ -186,6 +208,27 @@ public class AddImmunizationDialog extends javax.swing.JDialog {
             comboBoxVaccineName.addItem(vaccine);
        }
     }
+    
+    public void populateLabel()
+    {
+        String labelText = "Name: "+student.getFirstName() + " " + student.getLastName() + ", Age: " + student.getAge();
+        
+        labelTitle.setText(labelText);
+    }
+    public  int getMinDoseCount(String VaccineName)
+    {
+        int min = 1;
+        for(Vaccine vaccine : student.getVaccineList())
+        {
+        
+            if( vaccine.getVaccineName().equalsIgnoreCase(VaccineName))
+            {
+                   return vaccine.getDoseDetails().size();
+            } 
+        }
+            
+        return min;
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAddVaccine;
@@ -195,7 +238,7 @@ public class AddImmunizationDialog extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel labelTitle;
     // End of variables declaration//GEN-END:variables
 }
