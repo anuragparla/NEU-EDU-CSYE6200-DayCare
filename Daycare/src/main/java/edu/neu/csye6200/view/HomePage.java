@@ -1,17 +1,24 @@
 package edu.neu.csye6200.view;
 
 
+import edu.neu.csye6200.controller.AlertController;
 import edu.neu.csye6200.controller.DB4OUtil;
+import edu.neu.csye6200.model.Alert;
+import edu.neu.csye6200.model.AlertRecords;
 import edu.neu.csye6200.model.DayCare;
+import edu.neu.csye6200.model.Student;
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Dialog;
+import java.util.List;
 import javax.swing.FocusManager;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -21,6 +28,7 @@ public class HomePage extends javax.swing.JFrame {
 
     private DayCare dayCare;
     DB4OUtil db4OUtil;
+    DefaultTableModel alertDtm;
     /**
      * Creates new form HomePage
      */
@@ -43,6 +51,9 @@ public class HomePage extends javax.swing.JFrame {
         jDialog1 = new javax.swing.JDialog();
         jPanel3 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
+        jPanel5 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        alertsTable = new javax.swing.JTable();
         jFrame1 = new javax.swing.JFrame();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -60,33 +71,69 @@ public class HomePage extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Lucida Grande", 3, 18)); // NOI18N
         jLabel4.setText("Here is what you missed");
 
+        jPanel5.setBackground(new java.awt.Color(255, 51, 51));
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 246, Short.MAX_VALUE)
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 8, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 339, Short.MAX_VALUE))
+                .addContainerGap()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 328, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+            .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 61, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(11, Short.MAX_VALUE))
         );
+
+        jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        jScrollPane1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+
+        alertsTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null},
+                {null},
+                {null},
+                {null}
+            },
+            new String [] {
+                "Description"
+            }
+        ));
+        jScrollPane1.setViewportView(alertsTable);
 
         javax.swing.GroupLayout jDialog1Layout = new javax.swing.GroupLayout(jDialog1.getContentPane());
         jDialog1.getContentPane().setLayout(jDialog1Layout);
         jDialog1Layout.setHorizontalGroup(
             jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 667, Short.MAX_VALUE)
         );
         jDialog1Layout.setVerticalGroup(
             jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jDialog1Layout.createSequentialGroup()
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 331, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 346, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         javax.swing.GroupLayout jFrame1Layout = new javax.swing.GroupLayout(jFrame1.getContentPane());
@@ -222,15 +269,15 @@ public class HomePage extends javax.swing.JFrame {
         jPanel2.add(s1);
         jPanel2.setVisible(true);
         db4OUtil.storeSystem(dayCare);
-        
-//        CardLayout layout = (CardLayout) jPanel2.getLayout();
-//        layout.next(jPanel2);
+       
         
     }//GEN-LAST:event_studentMenuButtonActionPerformed
 
     private void alertsDialogButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_alertsDialogButtonActionPerformed
+        
         jDialog1.pack();
         jDialog1.setSize(jDialog1.getPreferredSize().width*2, jDialog1.getPreferredSize().height*2);
+        populateTable();
         jDialog1.setVisible(true);
     }//GEN-LAST:event_alertsDialogButtonActionPerformed
 
@@ -260,11 +307,12 @@ public class HomePage extends javax.swing.JFrame {
 
     public void postInit()
     {
-        
+        AlertController.generateTeacherAlerts(dayCare.getTeachersList());
         jFrame1.setVisible(false);
         jFrame1.setUndecorated(true);
         jFrame1.setSize(1920, 1080);
         jFrame1.setVisible(true);
+        generateTable();
     }
     /**
      * @param args the command line arguments
@@ -300,9 +348,37 @@ public class HomePage extends javax.swing.JFrame {
             }
         });
     }
+    
+        public void generateTable(){
+        
+        alertDtm = (DefaultTableModel) alertsTable.getModel();
+        jScrollPane1.setVisible(false);
+        alertsTable.setAutoCreateRowSorter(true);
+        alertsTable.setAutoResizeMode(JTable.AUTO_RESIZE_ALL_COLUMNS);
+        alertsTable.setFillsViewportHeight(true);
+        jScrollPane1.setViewportView(alertsTable);
+        jScrollPane1.setVisible(true);   
+        populateTable();
+        
+}
+    
+    public void populateTable(){
+        
+        alertDtm.setRowCount(0);
+        int ix = 0; // use ix as an index, i.e. id for object in table
+        AlertRecords a = AlertRecords.getInstance();
+        List<Alert> alerts= a.getAlerts();
+        for (Alert alert : alerts)
+        {
+            Object[] alertObj = {alert.getDescription()};
+            alertDtm.addRow(alertObj);
+        }
+    
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton alertsDialogButton;
+    private javax.swing.JTable alertsTable;
     private javax.swing.JButton classroomMenuButton;
     private javax.swing.JDialog jDialog1;
     private javax.swing.JFrame jFrame1;
@@ -314,6 +390,8 @@ public class HomePage extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton studentMenuButton;
     private javax.swing.JButton teacherMenuButton;
     // End of variables declaration//GEN-END:variables
