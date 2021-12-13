@@ -9,6 +9,7 @@ import edu.neu.csye6200.model.DayCare;
 import edu.neu.csye6200.model.Student;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Vector;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 
@@ -154,7 +155,7 @@ public class AddStudentToGroupDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_selectStudentInputActionPerformed
 
     public void setStudentsDropDown(){
-        List<Student> students = daycare.getStudentsList();
+        Vector<Student> students = daycare.getStudentsList();
         int n = students.size();
         String[] options = new String[n];
         for(int i = 0; i< n; i++){

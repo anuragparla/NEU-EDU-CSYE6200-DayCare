@@ -3,10 +3,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package edu.neu.csye6200.model;
-import java.util.List;
 import edu.neu.csye6200.util.DateUtil;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
+import java.util.Vector;
 import java.util.Date;
 //import java.util.Date;
 
@@ -22,7 +21,7 @@ public class Student extends Person {
     private String phoneNumber;
     private  int studentId ;
     private Date walkInDate;
-    private List<Vaccine> vaccineList;
+    private Vector<Vaccine> vaccineList;
     
     public Student(String firstName, String lastName,int age, double gpa, 
                    String fatherName, String motherName, String address,
@@ -34,7 +33,7 @@ public class Student extends Person {
         this.address = address;
         this.phoneNumber = phoneNumber;
         this.walkInDate = walkInDate;
-        this.vaccineList = new ArrayList<>();
+        this.vaccineList = new Vector<>();
     }
         
     public Student(String data) {
@@ -46,7 +45,7 @@ public class Student extends Person {
         setAddress(parsedString[6]);
         setPhoneNumber(parsedString[7]);
         setWalkInDate(DateUtil.parseStringToDate(parsedString[8], "yyyy-mm-dd"));
-        this.vaccineList = new ArrayList<>();
+        this.vaccineList = new Vector<>();
         
     }
     
@@ -111,7 +110,7 @@ public class Student extends Person {
         return walkInDate;
     }
 
-    public List<Vaccine> getVaccineList() {
+    public Vector<Vaccine> getVaccineList() {
         return vaccineList;
     }
     

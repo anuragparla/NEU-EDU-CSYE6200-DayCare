@@ -10,6 +10,7 @@ import java.awt.Dialog;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Vector;
 import javax.swing.JDialog;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
@@ -26,8 +27,8 @@ public class TeachersView extends javax.swing.JPanel {
      * Creates new form Teachers
      */
     DefaultTableModel myTM;
-    private List<Teacher> teachersList;
-    public TeachersView(List<Teacher> teachersList) {
+    private Vector<Teacher> teachersList;
+    public TeachersView(Vector<Teacher> teachersList) {
         initComponents();
         this.teachersList = teachersList;
         postInit();
@@ -193,7 +194,7 @@ public class TeachersView extends javax.swing.JPanel {
                 {null, null, null, null, null}
             },
             new String [] {
-                "Name", "Age", "Credits", "Address", "PhoneNumber"
+                "Id", "First Name", "Last Name", "Age", "Credits"
             }
         ));
         jScrollPane1.setViewportView(teacherTable);

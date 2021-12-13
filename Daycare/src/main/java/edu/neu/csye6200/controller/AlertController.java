@@ -10,10 +10,7 @@ import edu.neu.csye6200.model.DayCare;
 import edu.neu.csye6200.model.Student;
 import edu.neu.csye6200.model.Teacher;
 import edu.neu.csye6200.model.Vaccine;
-import java.time.*;
-import java.time.format.DateTimeFormatter;
 import java.util.Date;
-import java.util.List;
 import java.util.Vector;
 import java.util.concurrent.TimeUnit;
 
@@ -23,7 +20,7 @@ import java.util.concurrent.TimeUnit;
  */
 public class AlertController {
     public static long dateOffset = (365 * 24 * 60 * 60 * 1000);
-    public static void generateTeacherAlerts(List<Teacher> teachers){
+    public static void generateTeacherAlerts(Vector<Teacher> teachers){
         AlertRecords a = AlertRecords.getInstance();
         for(int i =0; i< teachers.size(); i++){
             Teacher t = teachers.get(i);
@@ -36,7 +33,7 @@ public class AlertController {
     }
     
     
-    public static void generateStudentAlerts(List<Student> studentsList){
+    public static void generateStudentAlerts(Vector<Student> studentsList){
         AlertRecords a = AlertRecords.getInstance();
         
         for(int i =0; i< studentsList.size(); i++){

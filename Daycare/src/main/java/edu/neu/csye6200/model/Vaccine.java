@@ -1,13 +1,10 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package edu.neu.csye6200.model;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Vector;
 
 /**
  
@@ -20,15 +17,14 @@ public class Vaccine {
     private int maxDoses;
     //private Date dateAdministered;
     private Date latestImmunizationDate;
-    private List<Dose> doseDetails;
-    //private List<ArrayList<Integer>> vaccineList = new ArrayList<ArrayList<>>>();
-
+    private Vector<Dose> doseDetails;
+    
     public Vaccine( String vaccineName, String vaccineDescription, int maxDoses) {
         
         this.vaccineName = vaccineName;
         this.vaccineDescription = vaccineDescription;
         this.maxDoses = maxDoses;
-        this.doseDetails = new ArrayList<>();
+        this.doseDetails = new Vector<>();
     }
     
     public Vaccine (String csvData) {
@@ -36,7 +32,7 @@ public class Vaccine {
         setVaccineName(parsedVaccineData[0]);
         setVaccineDescription(parsedVaccineData[1]);
         setMaxDoses(Integer.parseInt(parsedVaccineData[2]));
-        this.doseDetails = new ArrayList<>();
+        this.doseDetails = new Vector<>();
         
     }
 
@@ -73,11 +69,11 @@ public class Vaccine {
         this.latestImmunizationDate = latestImmunizationDate;
     }
 
-    public List<Dose> getDoseDetails() {
+    public Vector<Dose> getDoseDetails() {
         return doseDetails;
     }
 
-    public void setDoseDetails(List<Dose> doseDetails) {
+    public void setDoseDetails(Vector<Dose> doseDetails) {
         this.doseDetails = doseDetails;
     }
     

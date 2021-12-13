@@ -15,63 +15,61 @@ import java.util.List;
  * @author anuragparla
  */
 public class DayCareModel implements DayCareModelInterface{
-    private List<Person> studentList = new ArrayList<>();
-    private List<Person> teacherList = new ArrayList<>();
-    private List<Vaccine> vaccineList = new ArrayList<>();
+    
     @Override
-    public void createPersonViaCsv(String csvData) {
+    public Person createPersonViaCsv(String csvData) {
         String [] temp = csvData.split(",");
         int tempAge = Integer.parseInt(temp[2]);
         PersonFactory p;
         if (tempAge >360) {
             p = PersonFactoryProvider.getFactory("Teacher");
-            studentList.add(p.create("Teacher", csvData));
-        }
-        else {
-            p = PersonFactoryProvider.getFactory("Student");
-            teacherList.add(p.create("Student", csvData));
+            return p.create("Teacher", csvData);
         }
         
+            p = PersonFactoryProvider.getFactory("Student");
+            return p.create("Student", csvData);
+        
+       
     }
 
     @Override
-    public void createStudentViaForm(String firstName, String lastName, 
+    public Person createStudentViaForm(String firstName, String lastName, 
                                      int age, double gpa, String fatherName, 
                                      String motherName, String address, 
                                      String phoneNumber, Date walkInDate) {
         PersonFactory p;
         p = PersonFactoryProvider.getFactory("Student");
-        studentList.add(p.create(firstName,lastName, age, gpa,
-                        fatherName,motherName, address, phoneNumber,walkInDate));
+        return p.create(firstName,lastName, age, gpa,
+                        fatherName,motherName, address, phoneNumber,walkInDate);
     }
 
     @Override
-    public void createTeacherViaForm(String firstName, String lastName, 
+    public Person createTeacherViaForm(String firstName, String lastName, 
                                      int age, int credits, 
                                      Date reviewDate) {
         PersonFactory p;
-         p = PersonFactoryProvider.getFactory("Teacher");
-         teacherList.add(p.create(firstName,lastName, age, credits, reviewDate));
+        p = PersonFactoryProvider.getFactory("Teacher");
+        return p.create(firstName,lastName, age, credits, reviewDate);
     }
 
     @Override
-    public void addImmunizationRecordViaForm(String vaccineName,
+    public Vaccine addImmunizationRecordViaForm(String vaccineName,
                                              String vaccineDescription, 
                                              int maxDoses) {
         VaccineFactory v ;
         v = VaccineFactoryProvider.getFactory("Vaccine");
-        vaccineList.add(v.create( vaccineName, vaccineDescription, 
-                                 maxDoses));
+        return v.create( vaccineName, vaccineDescription, 
+                                 maxDoses);
                                                  
         
         
     }
 
     @Override
-    public void addImmunizationRecordViaCsv(String csvData) {
+    public Vaccine addImmunizationRecordViaCsv(String csvData) {
         VaccineFactory v;
         v = VaccineFactoryProvider.getFactory("Vaccine");
-        vaccineList.add(v.create(csvData));
+        return v.create(csvData);
     }
     
     

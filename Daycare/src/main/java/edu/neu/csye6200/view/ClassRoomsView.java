@@ -23,7 +23,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class ClassRoomsView extends javax.swing.JPanel {
 
-    List<Object> classRooms = new ArrayList<>();
+    Vector<Object> classRooms = new Vector<>();
     DefaultTableModel groupDtm;
     DefaultTableModel studentDtm;
     DayCare daycare;
@@ -426,7 +426,7 @@ public class ClassRoomsView extends javax.swing.JPanel {
         classRoomSelect.setSelectedItem(null);
     }
     
-    public void setClassRoomDropDown(List<Classroom> classRooms){
+    public void setClassRoomDropDown(Vector<Classroom> classRooms){
         int n = classRooms.size();
         System.out.println(n);
         String[] options = new String[n];

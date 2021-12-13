@@ -2,6 +2,7 @@ package edu.neu.csye6200.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Vector;
 
 /**
  *
@@ -11,9 +12,9 @@ public class DayCare {
     
     private static DayCare dayCare;
     
-    List<Student> studentsList;
-    List<Teacher> teachersList;
-    List<Classroom> classRoomsList ;
+    Vector<Student> studentsList;
+    Vector<Teacher> teachersList;
+    Vector<Classroom> classRoomsList ;
     
     
      public static DayCare getInstance()
@@ -29,9 +30,9 @@ public class DayCare {
     private DayCare()
     {
         
-        studentsList = new ArrayList<>();
-        teachersList = new ArrayList<>();
-        classRoomsList = new ArrayList<>();
+        studentsList = new Vector<>();
+        teachersList = new Vector<>();
+        classRoomsList = new Vector<>();
       
     }
 
@@ -43,27 +44,28 @@ public class DayCare {
         DayCare.dayCare = dayCare;
     }
 
-    public List<Student> getStudentsList() {
+    public Vector
+        <Student> getStudentsList() {
         return studentsList;
     }
 
-    public void setStudentsList(List<Student> studentsList) {
+    public void setStudentsList(Vector<Student> studentsList) {
         this.studentsList = studentsList;
     }
 
-    public List<Teacher> getTeachersList() {
+    public Vector<Teacher> getTeachersList() {
         return teachersList;
     }
 
-    public void setTeachersList(List<Teacher> teachersList) {
+    public void setTeachersList(Vector<Teacher> teachersList) {
         this.teachersList = teachersList;
     }
 
-    public List<Classroom> getClassRoomsList() {
+    public Vector<Classroom> getClassRoomsList() {
         return classRoomsList;
     }
 
-    public void setClassRoomsList(List<Classroom> classRoomsList) {
+    public void setClassRoomsList(Vector<Classroom> classRoomsList) {
         this.classRoomsList = classRoomsList;
     }
     

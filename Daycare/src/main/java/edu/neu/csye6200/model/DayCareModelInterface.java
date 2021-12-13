@@ -12,16 +12,16 @@ import java.util.Date;
  * @author anuragparla
  */
 public interface DayCareModelInterface {
-    void createPersonViaCsv(String csvData);
-    void createStudentViaForm(String firstName, String lastName,int age, 
+    Person createPersonViaCsv(String csvData);
+    Person createStudentViaForm(String firstName, String lastName,int age, 
                               double gpa,String fatherName, String motherName,
                               String address,String phoneNumber, Date walkInDate);
-    void createTeacherViaForm(String firstName, String lastName, int age, 
+    Person createTeacherViaForm(String firstName, String lastName, int age, 
                               int credits, Date reviewDate);
-    void addImmunizationRecordViaForm( String vaccineName, 
+    Vaccine addImmunizationRecordViaForm( String vaccineName, 
                                String vaccineDescription,int maxDoses);
     
-    void addImmunizationRecordViaCsv(String csvData);
+    Vaccine addImmunizationRecordViaCsv(String csvData);
     
     
     

@@ -2,6 +2,7 @@ package edu.neu.csye6200.view;
 import edu.neu.csye6200.model.Student;
 import java.util.Date;
 import java.util.List;
+import java.util.Vector;
 import javax.swing.JOptionPane;
 
 
@@ -13,7 +14,7 @@ public class AddStudentDialog extends javax.swing.JDialog {
     /**
      * Creates new form AddStudent
      */
-    public AddStudentDialog(List<Student> studentsList) 
+    public AddStudentDialog(Vector<Student> studentsList) 
             
     {    //super(parent, modal);
         initComponents();
@@ -167,7 +168,7 @@ public class AddStudentDialog extends javax.swing.JDialog {
                             .addComponent(lblName)
                             .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnAddStudent))
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addContainerGap(105, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -281,7 +282,7 @@ public class AddStudentDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_txtGpaActionPerformed
 
 
-    private List<Student> studentsList;
+    private Vector<Student> studentsList;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAddStudent;
     private javax.swing.JLabel jLabel1;
