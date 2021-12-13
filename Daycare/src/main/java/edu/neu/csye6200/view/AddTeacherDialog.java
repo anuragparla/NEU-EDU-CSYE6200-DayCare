@@ -7,6 +7,7 @@ package edu.neu.csye6200.view;
 import edu.neu.csye6200.model.Teacher;
 import java.util.Date;
 import java.util.List;
+import java.util.Vector;
 import javax.swing.JOptionPane;
 
 /**
@@ -18,8 +19,8 @@ public class AddTeacherDialog extends javax.swing.JDialog {
     /**
      * Creates new form AddTeacherDialog
      */
-    private List<Teacher> teachersList;
-    public AddTeacherDialog( List<Teacher> teachersList) {
+    private Vector<Teacher> teachersList;
+    public AddTeacherDialog( Vector<Teacher> teachersList) {
         //super(parent, modal);
         initComponents();
         this.teachersList = teachersList;

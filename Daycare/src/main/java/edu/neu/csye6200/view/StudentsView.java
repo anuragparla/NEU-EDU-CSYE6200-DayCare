@@ -16,6 +16,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Vector;
 import javax.swing.*;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -27,12 +28,12 @@ import javax.swing.table.DefaultTableModel;
  */
 public class StudentsView extends javax.swing.JPanel {
     
-    private List<Student> studentsList;
+    private Vector<Student> studentsList;
     DefaultTableModel myTM;
     /**
      * Creates new form StudentsView
      */
-    public StudentsView(List<Student> studentsList) {
+    public StudentsView(Vector<Student> studentsList) {
         initComponents();
         this.studentsList = studentsList;
         postInit();

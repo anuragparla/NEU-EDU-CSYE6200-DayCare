@@ -175,7 +175,7 @@ public class AddGroupDialog extends javax.swing.JDialog {
     }
     
     public void setTeacherDropDown(){
-        List<Teacher> teachers = daycare.getTeachersList();
+        Vector<Teacher> teachers = daycare.getTeachersList();
         int n = teachers.size();
         String[] options = new String[n];
         for(int i = 0; i< n; i++){
