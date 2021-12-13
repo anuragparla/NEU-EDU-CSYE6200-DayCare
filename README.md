@@ -32,6 +32,7 @@
 ---
 
 ```sh
+- run Homepage.java from edu.neu.csye6200.view package 
 
 ```
 
